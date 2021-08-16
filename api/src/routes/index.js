@@ -13,6 +13,7 @@ router.get("/countries", (req, res) => {
     y guardarlos en su propia base de datos y luego ya utilizarlos desde allí 
     (Debe almacenar solo los datos necesarios para la ruta principal)
     Obtener un listado de los paises. */}
+    
 
 })
 
