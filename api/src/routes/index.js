@@ -1,19 +1,29 @@
 const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-
+const {Country} = require('../db.js')
 
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-router.get("/countries", (req, res) => {
+router.get("/countries", async(req, res) => {
 {/*En una primera instancia deberán traer todos los países desde restcountries 
     y guardarlos en su propia base de datos y luego ya utilizarlos desde allí 
     (Debe almacenar solo los datos necesarios para la ruta principal)
     Obtener un listado de los paises. */}
-    
+    const allCountries=await pool.query("SELECT * FROM countries")
+
+
+{/* 
+    try {
+        const allCoutries = await pool.query("SELECT * FROM countries");
+        res.json(allCoutries.rows);
+    } catch (error) {
+        console.error(error.message);
+    }
+    */}
 
 })
 
@@ -31,11 +41,24 @@ router.get("/countries?name",(req, res) => {
  */}
 })
 
-router.post("/activity" , (req, res) => {
+router.post("/activity" , async(req, res) => {
 {/*Recibe los datos recolectados desde el formulario
     controlado de la ruta de creación de actividad turística por body
     Crea una actividad turística en la base de datos */}
-
+    const {name,flag, continent} = req.body;
+    try {
+      const newCountry = await Country.create({
+        
+        name,
+        flag,
+        continent
+      });
+      res.json(newCountry);
+      console.log("agregado a tabla")
+    } catch (error) {
+      res.send(error);
+    }
+   
 })
 
 module.exports = router;
