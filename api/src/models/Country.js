@@ -5,10 +5,12 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('country', {
     
-    country_id:{
+    ID:{
       type: DataTypes.INTEGER,
       allowNull:false,
-      unique:true
+      unique:true,
+      primaryKey:true,
+      autoIncrement:true
       
     },
     name: {

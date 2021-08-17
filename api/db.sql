@@ -1,7 +1,7 @@
 CREATE DATABASE countries;
 
 CREATE TABLE country(
-    country_id SERIAL PRIMARY KEY,
+    ID SERIAL PRIMARY KEY,
     countryName VARCHAR(255) NOT NULL,
     flag VARCHAR(255),
     continent VARCHAR(255), 
@@ -12,9 +12,9 @@ CREATE TABLE country(
  
 );
 CREATE TABLE activity(
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    ID SERIAL PRIMARY KEY,
+     name VARCHAR(255) ,
     dificultad VARCHAR(255),
     duracion VARCHAR(255),
     temporada VARCHAR(255)
-)
+);
