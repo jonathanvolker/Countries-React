@@ -35,12 +35,12 @@ module.exports = (sequelize) => {
       allowNull:true
 
     },
-    subregion:{
+    region:{
       type:DataTypes.STRING,
 
     },
-    poblacion:{
-      type: DataTypes.STRING,
+    population:{
+      type: DataTypes.INTEGER,
     }
 
   });
