@@ -10,100 +10,77 @@ const router = Router();
 
 const URL= 'https://restcountries.eu/rest/v2/all';
 
-
   
       
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-router.post('/countries',async(req, res,next)=> {
-       
-async function lista(){ 
-    
-    await fetch(URL)
-         .then((response) => {
-                 return response.json()
-                 })
-         .then((list) => {
-          
-           const all = list.map(async (l) => {
-           
-               const newCountry = await Country.create({
-                   name:l.name,
-                   flag:l.flag,
-                   continent:l.continent, 
-                   capital:l.capital,
-                   region:l.region,
-                   population:l.population
-                 }); 
-                 return newCountry;
-             }) 
-             return all;
-            }
-         ).then(res.json(all))
-         .catch(() => {
-         console.log('falla request')
-         })
-    
-       } 
-       lista()
-})
+
 
 
 
 router.get("/countries", async(req, res) => {
-{/*En una primera instancia deberán traer todos los países desde restcountries 
-    y guardarlos en su propia base de datos y luego ya utilizarlos desde allí 
-    (Debe almacenar solo los datos necesarios para la ruta principal)
-    Obtener un listado de los paises. */}
-   
-    
-         fetch(URL)
-             .then((response) => {
-                     return response.json()
-              })
-             .then((list) => {
-               const all = list.map(async (l) => {
-                const newCountry = await Country.create({
-                       name:l.name,
-                       flag:l.flag,
-                       continent:l.continent, 
-                       capital:l.capital,
-                       region:l.region,
-                       population:l.population
-                    
-                    });  console.log(newCountry)
-                return newCountry;
-                 }) 
-              return all;
-                }
-             ).then((all)=>{res.json(all)} )
-             .catch(() => {
-             console.log('falla request')
-             })
-        
-           
-         
 
-  /*  try {
+    const response = await fetch(URL);
+    const data = await response.json();
+    const countries = data.map( async (l) => {
+     const country = await Country.findOrCreate({ where: { ID:l.name,
+                                                      name:l.name,
+                                                      flag:l.flag,
+                                                      continent:l.region, 
+                                                      capital:l.capital,
+                                                      region:l.subregion,
+                                                      population:l.population } })
+      if (country === null) {
+        await Country.create({
+            ID:l.name,
+            name:l.name,
+            flag:l.flag,
+            continent:l.region, 
+            capital:l.capital,
+            region:l.subregion,
+            population:l.population
+        });
+      }
+    });
+    Promise.all(countries)
+      .then(async () => {
+        const allCountries = await Country.findAll();
+        //console.log(allCountries)
+        return allCountries;
+        
+      })
+      .then((data) => res.json(data))
     
-    
-        const allCoutries = await Country.findAll();
-        res.json(allCoutries);
-    } catch (error) {
-        console.error(error.message);
-    }
-    */
+
 
 })
 
-router.get("/countries/ID",(req, res) => {
+router.get("/countries/:ID",async(req, res) => {
 
     {/*Obtener el detalle de un país en particular
     Debe traer solo los datos pedidos en la ruta de detalle de país
     Incluir los datos de las actividades turísticas correspondientes */}
 
+    const {ID}= req.query;
+    const response = await fetch("http://localhost:3001/countries");
+    const data = await response.json();
+    const countriesID = data.map( async (l) => {
+    const countryByID = await Country.findOne({ where: { ID:l.name,
+      } })
+    
+    if(countryByID==ID){
+      Promise.all(countriesID)
+        .then(async () => {
+          const cID = await Country.findOne();
+          return cID;
+        })
+        .then((data) => res.json(data))
+
+    }else{res.send("pais no encontrado en base")}
+  })
+    
 })
 
 router.get("/countries?name",(req, res) => {
@@ -111,6 +88,8 @@ router.get("/countries?name",(req, res) => {
      query parameter (No necesariamente tiene que ser una matcheo exacto)
     Si no existe ningún país mostrar un mensaje adecuado
  */}
+
+
 })
 
 router.post("/activity" , async(req, res) => {

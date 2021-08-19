@@ -6,11 +6,11 @@ module.exports = (sequelize) => {
   sequelize.define('country', {
     
     ID:{
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull:false,
       unique:true,
       primaryKey:true,
-      autoIncrement:true
+      
       
     },
     name: {
