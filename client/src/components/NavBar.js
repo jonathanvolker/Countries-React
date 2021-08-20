@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import CountryList from './CountryList';
-import NavBar from './NavBar'
- 
-const HomeStyled=styled.div`
-/*container{
+
+const navBarStyled=styled.div`
+container{
     border: 1px solid black;
     align-items: center;
 }
@@ -13,7 +11,7 @@ const HomeStyled=styled.div`
      border: 1px solid black
  }
  input {
-   
+    /* width: 100%; */
     flex: 1;
     border: none;
     height: 48px;
@@ -28,32 +26,28 @@ const HomeStyled=styled.div`
   }
   header{
       align-items: center;
-  }*/
+  }
 
 `
- 
+
 function Home(){
     
     
     return(
-        <HomeStyled> 
-           <div className="container">
-             {/* <form >
+        <navBarStyled> 
+            <div className="container">
+            <form >
                 <header> Busque un Pais por su nombre</header>
                 <label>
                     Pais:
                     <input type="text" className="countryInput" name="countryInput" placeholder="ingrese pais..."/>
                     <input type="submit"  value="Buscar"/>                   
                 </label>
-            </form> */}
-            
-                <NavBar/>
-                <br/>
-             <CountryList/>
+            </form>
+           
             </div>
-        </HomeStyled>
+        </navBarStyled>
     )
 }
 
 export default Home;
-
