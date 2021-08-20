@@ -32,17 +32,7 @@ router.get("/countries", async(req, res) => {
                                                       capital:l.capital,
                                                       region:l.subregion,
                                                       population:l.population } })
-      if (country === null) {
-        await Country.create({
-            ID:l.name,
-            name:l.name,
-            flag:l.flag,
-            continent:l.region, 
-            capital:l.capital,
-            region:l.subregion,
-            population:l.population
-        });
-      }
+    
     });
     Promise.all(countries)
       .then(async () => {
@@ -62,33 +52,24 @@ router.get("/countries/:ID",async(req, res) => {
     {/*Obtener el detalle de un país en particular
     Debe traer solo los datos pedidos en la ruta de detalle de país
     Incluir los datos de las actividades turísticas correspondientes */}
+     const {ID}=req.params;
+     const country = await Country.findByPk(ID)
+     res.json(country||"pais no encontrado")
 
-    const {ID}= req.query;
-    const response = await fetch("http://localhost:3001/countries");
-    const data = await response.json();
-    const countriesID = data.map( async (l) => {
-    const countryByID = await Country.findOne({ where: { ID:l.name,
-      } })
-    
-    if(countryByID==ID){
-      Promise.all(countriesID)
-        .then(async () => {
-          const cID = await Country.findOne();
-          return cID;
-        })
-        .then((data) => res.json(data))
-
-    }else{res.send("pais no encontrado en base")}
-  })
+  
     
 })
 
-router.get("/countries?name",(req, res) => {
+router.get("/countries/?name=",async (req, res) => {
     {/*Obtener los países que coincidan con el nombre pasado como
      query parameter (No necesariamente tiene que ser una matcheo exacto)
     Si no existe ningún país mostrar un mensaje adecuado
  */}
-
+ const cName = await Country.query('SELECT FROM countries', {
+  name: req.query.name,
+  mapToModel: true
+});console.log(cName)
+   res.json(cName|| "pais no encontrado")
 
 })
 
