@@ -25,7 +25,7 @@ router.get("/countries", async(req, res) => {
     const response = await fetch(URL);
     const data = await response.json();
     const countries = data.map( async (l) => {
-     const country = await Country.findOrCreate({ where: { ID:l.name,
+    const country = await Country.findOrCreate({ where: { ID:l.name,
                                                       name:l.name,
                                                       flag:l.flag,
                                                       continent:l.region, 
@@ -55,7 +55,7 @@ router.get("/countries/:ID",async(req, res) => {
      const {ID}=req.params;
      const country = await Country.findByPk(ID)
      res.json(country||"pais no encontrado")
-
+    
   
     
 })

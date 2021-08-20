@@ -18,20 +18,6 @@ background: linear-gradient(to bottom, blue 50%, lightblue 75%);
 
 function CountryList (){
 
-/* const dispatch = useDispatch()
-
-  const countryListByName = useSelector((state) => state.countryListByName)
-
-  const countryList = useSelector((state) => {
-    if (state.filterByRegion !== '' && countryListByName.length === 0) {
-      return state.coutryFilteredByRegion;
-    }
-    if (countryListByName.length > 0) {
-      return countryListByName
-    }
-
-    return state.countryList;
-  }) */
 
  const [data, setData] = useState([]);
 
@@ -41,7 +27,7 @@ function CountryList (){
         return response.json()
       })
       .then((list) => {
-        console.log(list)
+       // console.log(list)
         setData(list)
         
       })

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components';
 
 const navBarStyled=styled.div`
@@ -31,18 +31,48 @@ container{
 `
 
 function Home(){
-    
+
+
     
     return(
         <navBarStyled> 
             <div className="container">
             <form >
                 <header> Busque un Pais por su nombre</header>
+                <br/>
                 <label>
                     Pais:
-                    <input type="text" className="countryInput" name="countryInput" placeholder="ingrese pais..."/>
-                    <input type="submit"  value="Buscar"/>                   
+                    <input type="text" 
+                           className="countryInput" 
+                           name="countryInput" 
+                           placeholder="ingrese pais..."/>
+                    <input type="submit"  
+                           value="Buscar"/>                   
                 </label>
+                <label>
+                     <br/>
+                     <br/>
+                     Filtar continente:
+                     <select name="continente">
+                         <option>America</option>
+                         <option>Europa</option>
+                         <option>Asia</option>
+                         <option>Oceania</option>
+                     </select>
+                     <input type="submit" value="Aplicar"/>
+                </label>
+                <label>
+                     <br/>
+                    
+                     Filtar actividad:
+                     <select name="actividad">
+                         <option>Actividad{/** aca iria el mapeo de la 
+                           actvidad turistica
+                           */} </option>
+                     </select>
+                     <input type="submit" value="Aplicar"/>
+                </label>
+                
             </form>
            
             </div>

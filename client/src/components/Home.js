@@ -38,18 +38,9 @@ function Home(){
     return(
         <HomeStyled> 
            <div className="container">
-             {/* <form >
-                <header> Busque un Pais por su nombre</header>
-                <label>
-                    Pais:
-                    <input type="text" className="countryInput" name="countryInput" placeholder="ingrese pais..."/>
-                    <input type="submit"  value="Buscar"/>                   
-                </label>
-            </form> */}
-            
                 <NavBar/>
                 <br/>
-             <CountryList/>
+                <CountryList/>
             </div>
         </HomeStyled>
     )

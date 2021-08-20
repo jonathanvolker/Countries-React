@@ -16,7 +16,7 @@ img{
     border-radius:10px;
 }
 a{
-  border-radius: 10x;
+  border-radius: 20x;
    text-decoration: none;
   
   background: rgb(2,0,36);
@@ -30,10 +30,10 @@ function Inicio(){
     return(
         <InicioStyled> 
                 <img src="https://i1.wp.com/hipertextual.com/wp-content/uploads/2016/05/Mundo.png?w=1560&ssl=1"></img>
-               <br/>
-                Inicio 
-                <a href="http://localhost:3000/home"><input type="button" value="Home"/></a>
-                 </InicioStyled>
+                <br/>
+                <a href="http://localhost:3000/home">
+                <input type="button" value="Home"/></a>
+        </InicioStyled>
     )
 }
 
