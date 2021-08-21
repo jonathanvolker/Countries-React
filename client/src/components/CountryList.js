@@ -35,26 +35,10 @@ function CountryList (){
 const dispatch=useDispatch(); 
 const data= useSelector((state)=>state.CountryList)
 
-console.log("mi lista de paises",data)
-
- //const [data, setData] = useState([]);
-
   useEffect(() => {
      dispatch(getCountries())
-    /*     fetch('http://localhost:3001/countries')
-      .then((response) => {
-        return response.json()
-      })
-      .then((list) => {
-       // console.log(list)
-        //setData(list)
-        
-      })
-      .catch(() => {
-        console.log('error paises no encontrados')
-      }) */
+   
   }, [])
-
 
     return(
         
