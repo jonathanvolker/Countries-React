@@ -65,12 +65,14 @@ router.get("/countries/?name=",async (req, res) => {
      query parameter (No necesariamente tiene que ser una matcheo exacto)
     Si no existe ningún país mostrar un mensaje adecuado
  */}
- const cName = await Country.query('SELECT FROM countries', {
+ /* const cName = await Country.query('SELECT FROM countries', {
   name: req.query.name,
   mapToModel: true
 });console.log(cName)
-   res.json(cName|| "pais no encontrado")
-
+   res.json(cName|| "pais no encontrado") */
+   const {ID}=req.query;
+   const country = await Country.findByPk(ID)
+   res.json(country||"pais no encontrado")
 })
 
 router.post("/activity" , async(req, res) => {

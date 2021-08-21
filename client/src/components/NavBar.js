@@ -2,16 +2,23 @@ import React,{useState} from 'react';
 import styled from 'styled-components';
 
 const navBarStyled=styled.div`
-container{
-    border: 1px solid black;
-    align-items: center;
-}
+
+/* border: 1px solid black;
+align-items: center;
+display:grid;
+grid-row-gap: 2.3em;
+background: var(--background);
+justify-content: center;
+border: 1px solid red;
+padding:4em 2em;
+background-color: linear-gradient(to bottom, blue 50%, lightblue 75%); */
+
  
- form{
+ .form{
      border: 1px solid black
  }
- input {
-    /* width: 100%; */
+ .input {
+     width: 100%; 
     flex: 1;
     border: none;
     height: 48px;
@@ -24,7 +31,7 @@ container{
       color: #C4C4C4;
     }
   }
-  header{
+  .header{
       align-items: center;
   }
 
@@ -36,7 +43,7 @@ function Home(){
     
     return(
         <navBarStyled> 
-            <div className="container">
+            
             <form >
                 <header> Busque un Pais por su nombre</header>
                 <br/>
@@ -75,7 +82,7 @@ function Home(){
                 
             </form>
            
-            </div>
+            
         </navBarStyled>
     )
 }

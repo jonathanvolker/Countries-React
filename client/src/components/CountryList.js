@@ -9,9 +9,23 @@ display:grid;
 grid-row-gap: 2.3em;
 background: var(--background);
 justify-content: center;
-border: 1px solid red;
+//border: 1px solid;
 padding:4em 2em;
-background: linear-gradient(to bottom, blue 50%, lightblue 75%);
+background: grey;
+.boton_personalizado{
+    text-decoration: none;
+    padding: 5px;
+    font-weight: 50px;
+    font-size: 10px;
+    color: black;
+    //background-color: #1883ba;
+    border-radius: 6px;
+    border: 1px solid black;
+  }
+  .boton_personalizado:hover{
+    color: #1883ba;
+    background-color: #ffffff;
+  }
 
 `;
 
@@ -40,6 +54,10 @@ function CountryList (){
     return(
         
         <CountryListStyled>
+          <label>
+          <a class="boton_personalizado" href=""> prev</a>
+          <a class="boton_personalizado" href="">next</a>
+          </label>
             {
           data.map(({ name, flag,continent }) => {
             return (
