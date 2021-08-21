@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-
-//import { useSelector,useDispatch } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import Country from './Country';
+import * as ActionsCreators from "../redux/actions"
+import {getCountries} from "../redux/actions"
 
 const CountryListStyled=styled.div`
 display:grid;
@@ -31,23 +32,27 @@ background: grey;
 
 
 function CountryList (){
+const dispatch=useDispatch(); 
+const data= useSelector((state)=>state.CountryList)
 
+console.log("mi lista de paises",data)
 
- const [data, setData] = useState([]);
+ //const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/countries')
+     dispatch(getCountries())
+    /*     fetch('http://localhost:3001/countries')
       .then((response) => {
         return response.json()
       })
       .then((list) => {
        // console.log(list)
-        setData(list)
+        //setData(list)
         
       })
       .catch(() => {
-        console.log('hubo un error, que dolor que dolo que pena')
-      })
+        console.log('error paises no encontrados')
+      }) */
   }, [])
 
 
@@ -55,13 +60,14 @@ function CountryList (){
         
         <CountryListStyled>
           <label>
-          <a class="boton_personalizado" href=""> prev</a>
-          <a class="boton_personalizado" href="">next</a>
+          <a className="boton_personalizado" href=""> prev</a>
+          <a className="boton_personalizado" href="">next</a>
           </label>
             {
           data.map(({ name, flag,continent }) => {
             return (
               <Country
+                key={name}
                 flag={flag}
                 name={name}
                 region={continent}
