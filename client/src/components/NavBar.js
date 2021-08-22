@@ -43,8 +43,8 @@ background-color: linear-gradient(to bottom, blue 50%, lightblue 75%); */
 
 
 function Home(){
-    
-    
+    const dispatch=useDispatch();
+    const data= useSelector((state)=>state.CountryDetail)
     
     const [datos, setDatos] = useState({
         nombre: ''
@@ -58,6 +58,10 @@ function Home(){
             ...datos,
             [event.target.name] : event.target.value
         })
+    }
+    const buscar= ()=>{
+        dispatch(getCountry(datos))
+        console.log(datos)
     }
 
     const enviarDatos = (event) => {
@@ -78,8 +82,9 @@ function Home(){
                            placeholder="ingrese pais..."
                            onChange={handleInputChange}
                            />
-                    <button type="submit"  
-                            value="Buscar"> Buscar</button>                   
+                    <button   
+                            value="Buscar"
+                            onClick={buscar}> Buscar</button>                   
                 </label>
                 <label>
                      <br/>

@@ -17,7 +17,7 @@ const initialState ={
         if(action.type === "GET_COUNTRY"){
     
             return{
-                ...state,
+                
                     CountryDetail: action.payload
             }
     
