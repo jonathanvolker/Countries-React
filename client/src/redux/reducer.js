@@ -1,9 +1,8 @@
 const initialState ={
     CountryList : [],
   
-    CountryDetail:{}// detalles del pais buscado
-    
-    }
+    CountryDetail:{} 
+}
     
     function rootReducer(state = initialState, action) {
       
@@ -27,5 +26,5 @@ const initialState ={
     
         return state;
       }
-      
+     
       export default rootReducer;

@@ -1,5 +1,9 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import styled from 'styled-components';
+import { useSelector,useDispatch } from 'react-redux';
+import {getCountry} from "../redux/actions"
+import * as ActionsCreators from "../redux/actions"
+
 
 const navBarStyled=styled.div`
 
@@ -37,24 +41,45 @@ background-color: linear-gradient(to bottom, blue 50%, lightblue 75%); */
 
 `
 
+
 function Home(){
-
-
     
+    
+    
+    const [datos, setDatos] = useState({
+        nombre: ''
+    })
+
+
+    const handleInputChange = (event) => {
+        // console.log(event.target.name)
+        // console.log(event.target.value)
+        setDatos({
+            ...datos,
+            [event.target.name] : event.target.value
+        })
+    }
+
+    const enviarDatos = (event) => {
+        event.preventDefault()
+        console.log('enviando datos...' + datos.nombre)
+    }
     return(
         <navBarStyled> 
             
-            <form >
+            <form onSubmit={enviarDatos} >
                 <header> Busque un Pais por su nombre</header>
                 <br/>
-                <label>
+                <label htmlFor="pais">
                     Pais:
                     <input type="text" 
                            className="countryInput" 
-                           name="countryInput" 
-                           placeholder="ingrese pais..."/>
-                    <input type="submit"  
-                           value="Buscar"/>                   
+                           name="nombre" 
+                           placeholder="ingrese pais..."
+                           onChange={handleInputChange}
+                           />
+                    <button type="submit"  
+                            value="Buscar"> Buscar</button>                   
                 </label>
                 <label>
                      <br/>
