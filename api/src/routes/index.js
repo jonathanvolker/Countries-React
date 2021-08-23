@@ -9,7 +9,7 @@ const router = Router();
 
 
 const URL= 'https://restcountries.eu/rest/v2/all';
-
+const URLname="https://restcountries.eu/rest/v2/name/"
   
       
 
@@ -19,7 +19,7 @@ const URL= 'https://restcountries.eu/rest/v2/all';
 
 
 router.get("/countries", async(req, res) => {
-
+ try{
   if(req.query.name){ 
     const {name}=req.query;
     const country = await Country.findAll({
@@ -27,6 +27,7 @@ router.get("/countries", async(req, res) => {
         name:name,
       }
   })
+    
   console.log(name)
   res.json(country ||"pais no encontrado")}
   else{
@@ -54,12 +55,19 @@ router.get("/countries", async(req, res) => {
         
       })
       .then((data) => res.json(data))
-    }
-
-
+     } }
+      catch (error) {
+       res.send("error al buscar paises", error)
+     }
+    
 })
 
+router.get("/countries/:ID", async(req, res) => {
+ const {ID} = req.params
+ const country = await Country.findByPk(ID)
+ res.json(country ||"pais no encontrado")
 
+})
 
 
 router.post("/activity" , async(req, res) => {

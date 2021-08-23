@@ -1,8 +1,8 @@
-import React,{useEffect, useState} from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components';
-import { useSelector,useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {getCountry} from "../redux/actions"
-import * as ActionsCreators from "../redux/actions"
+
 
 
 const navBarStyled=styled.div`

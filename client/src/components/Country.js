@@ -31,6 +31,7 @@ p{
 
 function Country({ name, flag, region}) {
     
+    
     return(
         <>
         <CountryStyled>

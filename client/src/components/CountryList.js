@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import { useSelector,useDispatch } from 'react-redux';
 import Country from './Country';
-//import Pagination from './Pagination'
-import * as ActionsCreators from "../redux/actions"
+
 import {getCountries} from "../redux/actions"
-import Pagination from './Pagination';
 
 
 const CountryListStyled=styled.div`
@@ -40,7 +38,7 @@ const dispatch=useDispatch();
 const posts= useSelector((state)=>state.CountryList)
 useEffect(()=>{
   dispatch(getCountries())
-},[])
+},[getCountries])
 
 //seteo estado para iniciar lista
 const [state,setState]=useState([false]);
@@ -72,13 +70,13 @@ const handleSubmit =(e)=>{
   changeValidation();
 }
 
-  if(state[0] == false){
+  if(state[0] === false){
       
       return(
       <CountryListStyled>
         <form onSubmit={handleSubmit}>
         <h1>Sin Paises para mostrar</h1>
-        <button className="boton_personalizado" type="submit" onClick={handleSubmit}>Mostrar primeros 10</button>
+        <button className="boton_personalizado" type="submit" onClick={handleSubmit}>Mostrar 10</button>
         </form>
       </CountryListStyled>)
   }
@@ -114,8 +112,8 @@ const handleSubmit =(e)=>{
                 flag={flag}
                 name={name}
                 region={continent}
-              />
-            </>
+                />
+              </>
             )
           })
         }
