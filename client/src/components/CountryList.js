@@ -11,10 +11,11 @@ display:grid;
 grid-row-gap: 2.3em;
 background: var(--background);
 justify-content: center;
+align-items: center;
 //border: 1px solid;
 padding:4em 2em;
 background: grey;
-.boton_personalizado{
+.boton_personalizado1{
     text-decoration: none;
     padding: 5px;
     font-weight: 50px;
@@ -23,12 +24,28 @@ background: grey;
     //background-color: #1883ba;
     border-radius: 6px;
     border: 1px solid black;
+    margin-left: 70px;
+  }
+.boton_personalizado{
+  
+    text-decoration: none;
+    padding: 5px;
+    font-weight: 50px;
+    font-size: 10px;
+    color: black;
+    //background-color: #1883ba;
+    border-radius: 6px;
+    border: 1px solid black;
+    margin-left:1px;
   }
   .boton_personalizado:hover{
     color: #1883ba;
     background-color: #ffffff;
   }
-
+.country{
+  display: grid;
+  justify-content: center;
+}
 `;
 
 
@@ -75,8 +92,10 @@ const handleSubmit =(e)=>{
       return(
       <CountryListStyled>
         <form onSubmit={handleSubmit}>
-        <h1>Sin Paises para mostrar</h1>
-        <button className="boton_personalizado" type="submit" onClick={handleSubmit}>Mostrar 10</button>
+        <div className="form-group">
+        <h2>Mostrar todos</h2>
+        <button className="boton_personalizado1" type="submit" onClick={handleSubmit}>Mostrar 10</button>
+        </div>
         </form>
       </CountryListStyled>)
   }
@@ -106,13 +125,14 @@ const handleSubmit =(e)=>{
             {
           currentPost.map(({ name, flag,continent }) => {
             return (<>
-             
+              <div className="country">
               <Country
                 key={name}
                 flag={flag}
                 name={name}
                 region={continent}
                 />
+                </div>
               </>
             )
           })
