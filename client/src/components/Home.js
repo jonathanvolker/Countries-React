@@ -40,7 +40,7 @@ function Home(){
            <div className="container">
                 <NavBar/>
                 <br/>
-                <CountryList/>
+                <CountryList state={false} />
             </div>
         </HomeStyled>
     )

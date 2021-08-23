@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import { useSelector,useDispatch } from 'react-redux';
 import Country from './Country';
+//import Pagination from './Pagination'
 import * as ActionsCreators from "../redux/actions"
 import {getCountries} from "../redux/actions"
+import Pagination from './Pagination';
+
 
 const CountryListStyled=styled.div`
 display:grid;
@@ -32,39 +35,95 @@ background: grey;
 
 
 function CountryList (){
+  //para traer los pases del strore
 const dispatch=useDispatch(); 
-const data= useSelector((state)=>state.CountryList)
+const posts= useSelector((state)=>state.CountryList)
+useEffect(()=>{
+  dispatch(getCountries())
+},[])
 
-  useEffect(() => {
-     dispatch(getCountries())
-   
-  }, [])
+//seteo estado para iniciar lista
+const [state,setState]=useState([false]);
 
+//seteo cantidades a la lista
+const [currentPage,setCurrentPage]=useState(1);
+const [postsPerPage,setPostPerPage]=useState(10);
+const pageNumbers=[];
+const totalPost= posts.length;
+const indexOfLastPost= currentPage*postsPerPage;
+const indexOfFirstPost= indexOfLastPost - postsPerPage;
+const currentPost = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+//ciclo para crear los botones de paginado
+for(let i=1; i<= Math.ceil(totalPost /postsPerPage);i++){
+    pageNumbers.push(i)
+}
+//fn para cambiar la pagina
+const paginate= (pageNumbers) =>{
+  setCurrentPage(pageNumbers)
+}
+
+const changeValidation=()=>{ 
+  setState(true)  
+}
+
+const handleSubmit =(e)=>{
+  e.preventDefault();
+  changeValidation();
+}
+
+  if(state[0] == false){
+      
+      return(
+      <CountryListStyled>
+        <form onSubmit={handleSubmit}>
+        <h1>Sin Paises para mostrar</h1>
+        <button className="boton_personalizado" type="submit" onClick={handleSubmit}>Mostrar primeros 10</button>
+        </form>
+      </CountryListStyled>)
+  }
+
+  else{
     return(
         
-        <CountryListStyled>
-          <label>
-          <a className="boton_personalizado" href=""> prev</a>
-          <a className="boton_personalizado" href="">next</a>
-          </label>
+       <CountryListStyled>
+         
+               <nav>
+                  <ul>
+                      {
+                      pageNumbers.map((number)=>{
+                          return ( 
+                          
+                              <a className="boton_personalizado"
+                              onClick={()=> paginate(number) }
+                              >
+                                {number} 
+                              </a>
+                          )
+                          })
+                      }
+                  </ul>
+               </nav>
+          
             {
-          data.map(({ name, flag,continent }) => {
-            return (
+          currentPost.map(({ name, flag,continent }) => {
+            return (<>
+             
               <Country
                 key={name}
                 flag={flag}
                 name={name}
                 region={continent}
               />
+            </>
             )
           })
         }
-              
-            
-            
+
         </CountryListStyled>
         
-    )
+    )}
+    
 }
 
 

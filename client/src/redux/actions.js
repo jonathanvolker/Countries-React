@@ -19,7 +19,7 @@ export const getCountries = () =>
 export const getCountry = ({nombre}) => 
         //obtengo el obj de pais pero por id
         async(dispatch) =>{
-            const response= await fetch("http://localhost:3001/countries/"+nombre)
+            const response= await fetch("http://localhost:3001/countries?name="+nombre)
             const data= await response.json();
             console.log("unico pais",data)
             Promise.all(data)

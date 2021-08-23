@@ -44,8 +44,7 @@ background-color: linear-gradient(to bottom, blue 50%, lightblue 75%); */
 
 function Home(){
     const dispatch=useDispatch();
-    const data= useSelector((state)=>state.CountryDetail)
-    
+  
     const [datos, setDatos] = useState({
         nombre: ''
     })
@@ -61,12 +60,12 @@ function Home(){
     }
     const buscar= ()=>{
         dispatch(getCountry(datos))
-        console.log(datos)
+        //console.log(datos)
     }
 
     const enviarDatos = (event) => {
         event.preventDefault()
-        console.log('enviando datos...' + datos.nombre)
+        //console.log('enviando datos...' + datos.nombre)
     }
     return(
         <navBarStyled> 

@@ -29,7 +29,7 @@ function Inicio(){
     
     return(
         <InicioStyled> 
-                <img src="https://i1.wp.com/hipertextual.com/wp-content/uploads/2016/05/Mundo.png?w=1560&ssl=1"></img>
+                <img src="https://i1.wp.com/hipertextual.com/wp-content/uploads/2016/05/Mundo.png?w=1560&ssl=1" alt="img not found"></img>
                 <br/>
                 <a href="http://localhost:3000/home">
                 <input type="button" value="Home"/></a>

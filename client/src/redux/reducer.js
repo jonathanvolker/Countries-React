@@ -1,7 +1,7 @@
 const initialState ={
     CountryList : [],
   
-    CountryDetail:{} 
+    CountryDetail:[] 
 }
     
     function rootReducer(state = initialState, action) {
