@@ -35,12 +35,15 @@ router.get("/countries", async(req, res) => {
     const data = await response.json();
     const countries = data.map( async (l) => {
     const country = await Country.findOrCreate({ where: { 
+                                                      ID:l.alpha3Code,
                                                       name:l.name,
                                                       flag:l.flag,
                                                       continent:l.region, 
                                                       capital:l.capital,
                                                       region:l.subregion,
-                                                      population:l.population } })
+                                                      population:l.population,
+                                                      area :l.area +" km2"
+                                                    } })
     
     });
     Promise.all(countries)
