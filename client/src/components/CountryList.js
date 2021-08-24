@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector,useDispatch } from 'react-redux';
 import Country from './Country';
 
-import {getCountries} from "../redux/actions"
+import {getCountries,getCountry} from "../redux/actions"
 
 
 const CountryListStyled=styled.div`
@@ -61,6 +61,13 @@ padding:4em 2em;
 
  
 }
+.navOrder{
+ display: flex;
+ flex-direction: column;
+  }
+.order{
+  text-decoration: none;
+}
 `;
 
 
@@ -70,6 +77,7 @@ const dispatch=useDispatch();
 const posts= useSelector((state)=>state.CountryList)
 useEffect(()=>{
   dispatch(getCountries())
+ 
 },[getCountries])
 
 //seteo estado para iniciar lista
@@ -103,60 +111,81 @@ const handleSubmit =(e)=>{
 }
 
   if(state[0] === false){
-      
-      return(
+      console.log(posts)
+    return(
+        
       <CountryListStyled>
-        <form onSubmit={handleSubmit}>
-        <div className="form-group">
-        <h2>Mostrar todos</h2>
-        <button className="boton_personalizado1" type="submit" onClick={handleSubmit}>Mostrar 10</button>
-        </div>
-        </form>
-      </CountryListStyled>)
+              <h1>Todos los paises</h1>
+              <div className="navOrder">
+              
+                <a className="order" href="">Z/A</a>
+              </div>
+              <nav className="paginate">
+                
+                 <ul>
+                     {
+                     pageNumbers.map((number)=>{
+                         return ( 
+                         
+                             <a className="boton_personalizado"
+                             onClick={()=> paginate(number) }
+                             >
+                               {number} 
+                             </a>
+                         )
+                         })
+                     }
+                 </ul>
+              </nav>
+         <div className="countryOrder">
+           {
+         currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {
+           return (<>
+           
+             <div className="country">
+             <Country
+               key={name}
+               flag={flag}
+               name={name}
+               region={continent}
+               subregion={subregion}
+               area={area}
+               population={population}
+               ID={ID}
+               />
+               </div>
+             </>
+           )
+         })
+       }</div>
+
+       </CountryListStyled>
+       
+   )
+      
   }
 
   else{
-    return(
-        
-       <CountryListStyled>
-         
-               <nav className="paginate">
-                  <ul>
-                      {
-                      pageNumbers.map((number)=>{
-                          return ( 
-                          
-                              <a className="boton_personalizado"
-                              onClick={()=> paginate(number) }
-                              >
-                                {number} 
-                              </a>
-                          )
-                          })
-                      }
-                  </ul>
-               </nav>
-          <div className="countryOrder">
-            {
-          currentPost.map(({ name, flag,continent }) => {
-            return (<>
-            
-              <div className="country">
-              <Country
-                key={name}
-                flag={flag}
-                name={name}
-                region={continent}
-                />
-                </div>
-              </>
-            )
-          })
-        }</div>
-
-        </CountryListStyled>
-        
-    )}
+    currentPost.map(({ name, flag,continent }) => {
+      return (<>
+      
+        <div className="country">
+        <Country
+          key={name}
+          flag={flag}
+          name={name}
+          region={continent}
+          changeValidation={changeValidation}
+          />
+          </div>
+        </>
+      )
+    })
+  
+  
+  
+  
+  }
     
 }
 

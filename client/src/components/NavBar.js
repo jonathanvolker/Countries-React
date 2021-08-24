@@ -6,15 +6,17 @@ import {getCountry} from "../redux/actions"
 
 
 const navBarStyled=styled.div`
+display: flex;
 
 
 .container{
     display: flex;
-    justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
+
 .form-c{
-/*     display:grid;
-    align-items: center; */
+    margin-right:20px;
 }
 .butt{
     text-decoration: none;
@@ -26,6 +28,7 @@ const navBarStyled=styled.div`
     border-radius: 6px;
     border: 1px solid black;
 }
+
 `
 
 
@@ -58,7 +61,12 @@ function Home(){
     return(
         
         <navBarStyled> 
-           <div className="container">
+          
+          <div className="container">
+            <div>
+            <img className="imagen" src="" alt="paises-Logo" border="0"/>
+            </div>
+           <div>
             <form onSubmit={enviarDatos} className="form-c" >
                 <header className="head"> Busque un Pais por su nombre</header>
                 <br/>
@@ -103,7 +111,7 @@ function Home(){
                 
             </form>
             </div>
-            
+            </div>
         </navBarStyled>
         
     )

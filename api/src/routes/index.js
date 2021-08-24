@@ -41,7 +41,7 @@ router.get("/countries", async(req, res) => {
                                                       flag:l.flag,
                                                       continent:l.region, 
                                                       capital:l.capital,
-                                                      region:l.subregion,
+                                                      subregion:l.subregion,
                                                       population:l.population,
                                                       area :l.area +" km2"
                                                     } })

@@ -1,6 +1,7 @@
-import React from 'react';
-//import CountryStyled from "./stylesJS/countrystyled"
+import React,{useState} from 'react';
+
 import styled from "styled-components";
+
 
 const CountryStyled =styled.div`
 /* width:264px;
@@ -33,9 +34,8 @@ img{
     color:white;
 }
 .mfInput{
-    
   text-decoration: none;
-  padding: 5px;
+  
   font-weight: 50px;
   font-size: 11px;
   color: black;
@@ -46,6 +46,23 @@ img{
   transition-duration: 0.3s;
 }
 .mfInput:hover{
+    color: #0FA2DD ;
+    background-color: #ffffff;
+}
+.close{
+  text-decoration: none;
+  height: 100%;
+ 
+  font-weight: 50px;
+  font-size: 11px;
+  color: black;
+  background-color: #0FA2DD ;
+  border-radius: 6px;
+  border: 1px solid black;
+  margin-left:130px;
+  transition-duration: 0.3s;
+}
+.close:hover{
     color: #0FA2DD ;
     background-color: #ffffff;
 }
@@ -63,9 +80,21 @@ p{
 `;
 
 
-function Country({ name, flag, region}) {
+
+function Country({name, flag,region,subregion, area, population,ID}) {
+  
     
-    
+    const [state,setState]=useState(false);
+    const changeValidation=()=>{ 
+        setState(true)  
+      }
+      const changeValidationFalse=()=>{ 
+        setState(false)  
+      }
+      
+ 
+
+    if(state==false){
     return(
         <>
         <CountryStyled>
@@ -73,16 +102,39 @@ function Country({ name, flag, region}) {
              <img loading="lazy" src={flag} alt="" />
              <div className="details">
                 <h2> {name}</h2>
+                
                 <p> <strong> Continente: {region}</strong> </p> 
                 <br/>
-                <input className="mfInput" type="submit"  value="Mas informacion"/>
+                <input onClick={changeValidation}  className="mfInput" type="submit"  value="Mas informacion"/>
                 <br/>
                 <br/>
                 <input className="mfInput" type="submit"  value="agregar actividad turistica"/>
              </div>
         </CountryStyled>
     </>
-    )
+    )}else{
+       return (
+        <>
+        <CountryStyled>
+             
+             <img loading="lazy" src={flag} alt="" />
+             <div className="details">
+             <input onClick={changeValidationFalse} className="close" type="submit"  value="cerrar detalle"/>
+                <h2> {name}</h2>
+                <br/>
+                <p> <strong> Continente: {region}</strong> </p> 
+                <p> <strong> Subregion: {subregion}</strong> </p> 
+                <p> <strong> Poblacion: {population}</strong> </p> 
+                <p> <strong> Area: {area}</strong> </p> 
+                <p> <strong> id de pais: {ID}</strong> </p> 
+
+                <br/>
+                <input className="mfInput" type="submit"  value="agregar actividad turistica"/>
+
+            </div>
+        </CountryStyled>
+    </>)
+    }
 
 }
 
