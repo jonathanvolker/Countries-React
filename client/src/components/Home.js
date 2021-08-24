@@ -4,13 +4,19 @@ import CountryList from './CountryList';
 import NavBar from './NavBar'
  
 const HomeStyled=styled.div`
-/*container{
-    border: 1px solid black;
-    align-items: center;
-}
+ 
+  width: 100%;
+  background: linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
  
  form{
-     border: 1px solid black
+     color:white;    
+ }
+ .container{
+   width: 100vw;
  }
  input {
    
@@ -28,7 +34,7 @@ const HomeStyled=styled.div`
   }
   header{
       align-items: center;
-  }*/
+  }
 
 `
  

@@ -9,21 +9,36 @@ overflow: hidden;
 box-shadow:0 0 7px 2px rgba(0,0,0,.03);
 background: rgb(2,0,36);
 background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-img{
+
+.img{
     width:50%;
-    height:50%;
+    height:70%;
     object-fit:cover;
     border-radius:10px;
 }
-a{
+.a{
   border-radius: 20x;
    text-decoration: none;
   
   background: rgb(2,0,36);
   margin: 5px;
 }
-button{
-    border-radius:10px;
+.homebutton{
+  
+  text-decoration: none;
+  padding: 5px;
+  font-weight: 50px;
+  font-size: 17px;
+  color: black;
+  background-color: #0FA2DD;
+  border-radius: 6px;
+  border: 1px solid black;
+  margin-left:1px;
+  transition-duration: 0.3s;
+}
+.homebutton:hover{
+    color: #1883ba;
+    background-color: #ffffff;
 }
 `
 
@@ -33,9 +48,8 @@ function Inicio(){
     return(
         <InicioStyled> 
                 <h1>Henry Countries</h1>
-                 
                 <a href="http://localhost:3000/home">
-                <input type="button" value="Home"/></a>
+                <input className="homebutton" type="button" value="Home"/></a>
                 <br/>
                 <a href="https://imgbb.com/"><img src="https://i.ibb.co/3hmB1t1/banderas.gif" alt="banderas" border="0"/></a>
                 <br/>

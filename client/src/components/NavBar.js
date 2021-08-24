@@ -7,13 +7,25 @@ import {getCountry} from "../redux/actions"
 
 const navBarStyled=styled.div`
 
-display:grid;
-grid-row-gap: 2.3em;
-background: var(--background);
-justify-content: center;
-align-items: center;
-//border: 1px solid;
 
+.container{
+    display: flex;
+    justify-content: center;
+}
+.form-c{
+/*     display:grid;
+    align-items: center; */
+}
+.butt{
+    text-decoration: none;
+    padding: 5px;
+    font-weight: 50px;
+    font-size: 10px;
+    color: black;
+    background:#0FA2DD ;
+    border-radius: 6px;
+    border: 1px solid black;
+}
 `
 
 
@@ -46,9 +58,9 @@ function Home(){
     return(
         
         <navBarStyled> 
-           
-            <form onSubmit={enviarDatos} >
-                <header> Busque un Pais por su nombre</header>
+           <div className="container">
+            <form onSubmit={enviarDatos} className="form-c" >
+                <header className="head"> Busque un Pais por su nombre</header>
                 <br/>
                 <label htmlFor="pais">
                     Pais:
@@ -58,14 +70,14 @@ function Home(){
                            placeholder="ingrese pais..."
                            onChange={handleInputChange}
                            />
-                    <button   
+                    <button className="butt"
                             value="Buscar"
                             onClick={buscar}> Buscar</button>                   
                 </label>
                 <label>
                      <br/>
                      <br/>
-                     Filtar continente:
+                     Filtrar continente:
                      <select name="continente">
                          <option>Asia</option>
                          <option>Europ</option>
@@ -75,12 +87,12 @@ function Home(){
                          <option>Polar</option>
 
                      </select>
-                     <input type="submit" value="Aplicar"/>
+                     <input className="butt" type="submit" value="Aplicar"/>
                 </label>
                 <label>
                      <br/>
                     
-                     Filtar actividad:
+                     Filtrar actividad:
                      <select name="actividad">
                          <option>Actividad{/** aca iria el mapeo de la 
                            actvidad turistica
@@ -90,7 +102,7 @@ function Home(){
                 </label>
                 
             </form>
-           
+            </div>
             
         </navBarStyled>
         

@@ -7,14 +7,22 @@ import {getCountries} from "../redux/actions"
 
 
 const CountryListStyled=styled.div`
-display:grid;
-grid-row-gap: 2.3em;
-background: var(--background);
+display:flex;
+flex-direction: column;
+
 justify-content: center;
 align-items: center;
+
 //border: 1px solid;
 padding:4em 2em;
-background: grey;
+//background: linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+.paginate{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+  
 .boton_personalizado1{
     text-decoration: none;
     padding: 5px;
@@ -24,7 +32,7 @@ background: grey;
     //background-color: #1883ba;
     border-radius: 6px;
     border: 1px solid black;
-    margin-left: 70px;
+    margin-left: 55px;
   }
 .boton_personalizado{
   
@@ -33,18 +41,25 @@ background: grey;
     font-weight: 50px;
     font-size: 10px;
     color: black;
-    //background-color: #1883ba;
+    background:#0FA2DD ;
     border-radius: 6px;
     border: 1px solid black;
-    margin-left:1px;
+    
+    
   }
   .boton_personalizado:hover{
     color: #1883ba;
     background-color: #ffffff;
   }
-.country{
-  display: grid;
-  justify-content: center;
+.form-group{
+  display: inline; }
+  
+.countryOrder{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+ 
 }
 `;
 
@@ -105,7 +120,7 @@ const handleSubmit =(e)=>{
         
        <CountryListStyled>
          
-               <nav>
+               <nav className="paginate">
                   <ul>
                       {
                       pageNumbers.map((number)=>{
@@ -121,10 +136,11 @@ const handleSubmit =(e)=>{
                       }
                   </ul>
                </nav>
-          
+          <div className="countryOrder">
             {
           currentPost.map(({ name, flag,continent }) => {
             return (<>
+            
               <div className="country">
               <Country
                 key={name}
@@ -136,7 +152,7 @@ const handleSubmit =(e)=>{
               </>
             )
           })
-        }
+        }</div>
 
         </CountryListStyled>
         
