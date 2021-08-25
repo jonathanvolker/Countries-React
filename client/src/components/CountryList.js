@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector,useDispatch } from 'react-redux';
 import Country from './Country';
 
-import {getCountries,getCountry} from "../redux/actions"
+import {getCountries} from "../redux/actions"
 
 
 const CountryListStyled=styled.div`
@@ -59,11 +59,10 @@ padding:4em 2em;
   flex-direction: row;
   flex-wrap: wrap;
 
- 
 }
 .navOrder{
  display: flex;
- flex-direction: column;
+ flex-direction: row;
   }
 .order{
   text-decoration: none;
@@ -80,6 +79,44 @@ useEffect(()=>{
  
 },[getCountries])
 
+const [orden,setOrden]=useState(false)
+
+const invert=()=>{
+  posts.sort(function (a, b) {
+    if (a.name > b.name) {
+      return -1;
+    }
+    if (a.name < b.name) {
+      return 1;
+    }
+    // a must be equal to b
+    return 0;
+  });
+}
+const invert2=()=>{
+  posts.sort(function (a, b) {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+    // a must be equal to b
+    return 0;
+  });
+
+}
+
+const changeOrdenZA=()=>{
+  setOrden(true);
+  invert();
+  console.log(posts)
+}
+const changeOrdenAZ=()=>{
+  setOrden(false);
+  invert2();
+  console.log(posts)
+}
 
 //seteo estado para iniciar lista
 const [state,setState]=useState([false]);
@@ -92,8 +129,6 @@ const totalPost= posts.length;
 const indexOfLastPost= currentPage*postsPerPage;
 const indexOfFirstPost= indexOfLastPost - postsPerPage;
 const currentPost = posts.slice(indexOfFirstPost, indexOfLastPost);
-
-
 //ciclo para crear los botones de paginado
 for(let i=1; i<= Math.ceil(totalPost /postsPerPage);i++){
     pageNumbers.push(i)
@@ -108,11 +143,73 @@ const changeValidation=()=>{
   
 }
 
-const handleSubmit =(e)=>{
-  e.preventDefault();
-  changeValidation();
-}
 
+  if(orden==false){
+  if(state[0] === false){
+      
+    return(
+        
+      <CountryListStyled>
+         <h1>Todos los paises</h1>
+         <div className="navOrder">
+              <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
+              <button key="a" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
+         </div>
+         <nav className="paginate">
+            <ul>
+              { pageNumbers.map((number)=>{
+                  return ( 
+                      <a className="boton_personalizado"
+                      onClick={()=> paginate(number) }>
+                        {number} 
+                      </a>
+                  )
+                  })
+              }
+              </ul>
+         </nav>
+         <div className="countryOrder">
+           {
+         currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {
+           return (
+           <>
+              <div className="country">
+                  <Country
+                    key={name}
+                    flag={flag}
+                    name={name}
+                    region={continent}
+                    subregion={subregion}
+                    area={area}
+                    population={population}
+                    ID={ID}
+                    />
+               </div>
+           </>
+           )
+         })
+       }</div>
+       </CountryListStyled>
+   )
+  }
+
+  else{
+    currentPost.map(({ name, flag,continent }) => {
+      return (<>
+      
+        <div className="country">
+             <Country
+              key={name}
+              flag={flag}
+              name={name}
+              region={continent}
+              changeValidation={changeValidation}
+              />
+          </div>
+        </>
+     ) })
+  }
+ }else{
   if(state[0] === false){
       
     return(
@@ -120,19 +217,17 @@ const handleSubmit =(e)=>{
       <CountryListStyled>
               <h1>Todos los paises</h1>
               <div className="navOrder">
-              
-                <a key="a" className="order" href="">Z/A</a>
+                  <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
+                  <button key="a" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
               </div>
               <nav className="paginate">
-                
                  <ul>
-                     {
+                   {
                      pageNumbers.map((number)=>{
                          return ( 
                          
                              <a className="boton_personalizado"
-                             onClick={()=> paginate(number) }
-                             >
+                             onClick={()=> paginate(number) } >
                                {number} 
                              </a>
                          )
@@ -140,28 +235,26 @@ const handleSubmit =(e)=>{
                      }
                  </ul>
               </nav>
-         <div className="countryOrder">
-           {
-         currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {
-           return (<>
-           
-             <div className="country">
-             <Country
-               key={name}
-               flag={flag}
-               name={name}
-               region={continent}
-               subregion={subregion}
-               area={area}
-               population={population}
-               ID={ID}
-               />
-               </div>
-             </>
-           )
-         })
-       }</div>
-
+            <div className="countryOrder">
+              {currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {
+                  return (
+                  <>
+                    <div className="country">
+                        <Country
+                          key={name}
+                          flag={flag}
+                          name={name}
+                          region={continent}
+                          subregion={subregion}
+                          area={area}
+                          population={population}
+                          ID={ID}
+                          />
+                      </div>
+                  </>
+                  )
+                }) }
+            </div>
        </CountryListStyled>
        
    )
@@ -170,18 +263,18 @@ const handleSubmit =(e)=>{
 
   else{
     currentPost.map(({ name, flag,continent }) => {
-      return (<>
-      
+      return (
+      <>
         <div className="country">
-        <Country
-          key={name}
-          flag={flag}
-          name={name}
-          region={continent}
-          changeValidation={changeValidation}
-          />
-          </div>
-        </>
+            <Country
+              key={name}
+              flag={flag}
+              name={name}
+              region={continent}
+              changeValidation={changeValidation}
+              />
+        </div>
+      </>
       )
     })
   
@@ -189,7 +282,7 @@ const handleSubmit =(e)=>{
   
   
   }
-    
+ }   
 }
 
 
