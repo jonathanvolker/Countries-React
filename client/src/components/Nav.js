@@ -3,36 +3,51 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import {getCountry} from "../redux/actions"
 
+ 
+const NavStyled=styled.div`
 
-
-const navBarStyled=styled.div`
-display: flex;
-
-
-.container{
+nav{
     display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+    justify-content: center;
+    background-image: url("https://i.ibb.co/cLKQFjK/Map-1000x500-1.jpg");  
+    background-repeat: repeat-x;
+    
+   
 }
 
+.form-div{
+    display: block;
+    font-size: 20px;
+    margin-left: 20px;
+}
 .form-c{
-    margin-right:20px;
+    font-family: 'Courier New', Courier, monospace;
+    color:black;
+    font-weight: bold;
+    font-size: 22px;
+}
+.countryInput{
+    background: white;
+    height: 17px;
+    border-radius: 6px;
 }
 .butt{
-    text-decoration: none;
-    padding: 5px;
-    font-weight: 50px;
-    font-size: 10px;
-    color: black;
-    background:#0FA2DD ;
-    border-radius: 6px;
-    border: 1px solid black;
+ font-weight: 50px;
+  font-size: 11px;
+  color: black;
+  background-color: #0FA2DD ;
+  border-radius: 6px;
+  border: 1px solid black;
+  margin-left:1px;
+  transition-duration: 0.3s;
 }
-
+.butt:hover{
+    color: #0FA2DD ;
+    background-color: #ffffff;
+}
 `
-
-
-function Home(){
+ 
+function Nav(){
     const dispatch=useDispatch();
   
     const [datos, setDatos] = useState({
@@ -58,15 +73,12 @@ function Home(){
         event.preventDefault()
         //console.log('enviando datos...' + datos.nombre)
     }
+    
     return(
-        
-        <navBarStyled> 
-          
-          <div className="container">
-            <div>
-            <img className="imagen" src="" alt="paises-Logo" border="0"/>
-            </div>
-           <div>
+        <NavStyled> 
+            <nav >
+           
+           <div className="form-div" >
             <form onSubmit={enviarDatos} className="form-c" >
                 <header className="head"> Busque un Pais por su nombre</header>
                 <br/>
@@ -95,7 +107,7 @@ function Home(){
                          <option>Polar</option>
 
                      </select>
-                     <input className="butt" type="submit" value="Aplicar"/>
+                     <button className="butt" type="submit">Aplicar</button>
                 </label>
                 <label>
                      <br/>
@@ -106,15 +118,14 @@ function Home(){
                            actvidad turistica
                            */} </option>
                      </select>
-                     <input type="submit" value="Aplicar"/>
+                     <button className="butt" type="submit"> Aplicar</button>
                 </label>
                 
             </form>
             </div>
-            </div>
-        </navBarStyled>
-        
+            </nav>
+        </NavStyled>
     )
 }
 
-export default Home;
+export default Nav;

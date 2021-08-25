@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import CountryList from './CountryList';
-import NavBar from './NavBar'
+import Nav from './Nav';
  
 const HomeStyled=styled.div`
  
   width: 100%;
-  background: linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  background: linear-gradient(90deg, rgba(136,148,240,1) 0%, rgba(106,120,227,1) 39%, rgba(55,71,191,1) 100%);
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -44,7 +44,7 @@ function Home(){
     return(
         <HomeStyled> 
            <div className="container">
-                <NavBar/>
+                <Nav/>
                 <br/>
                 <CountryList state={false} />
             </div>

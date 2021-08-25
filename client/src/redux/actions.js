@@ -1,6 +1,5 @@
 
 
-
 export const getCountries = () => 
  async(dispatch) =>{
     const response= await fetch("http://localhost:3001/countries")

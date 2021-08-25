@@ -80,6 +80,7 @@ useEffect(()=>{
  
 },[getCountries])
 
+
 //seteo estado para iniciar lista
 const [state,setState]=useState([false]);
 
@@ -92,6 +93,7 @@ const indexOfLastPost= currentPage*postsPerPage;
 const indexOfFirstPost= indexOfLastPost - postsPerPage;
 const currentPost = posts.slice(indexOfFirstPost, indexOfLastPost);
 
+
 //ciclo para crear los botones de paginado
 for(let i=1; i<= Math.ceil(totalPost /postsPerPage);i++){
     pageNumbers.push(i)
@@ -103,6 +105,7 @@ const paginate= (pageNumbers) =>{
 
 const changeValidation=()=>{ 
   setState(true)  
+  
 }
 
 const handleSubmit =(e)=>{
@@ -111,14 +114,14 @@ const handleSubmit =(e)=>{
 }
 
   if(state[0] === false){
-      console.log(posts)
+      
     return(
         
       <CountryListStyled>
               <h1>Todos los paises</h1>
               <div className="navOrder">
               
-                <a className="order" href="">Z/A</a>
+                <a key="a" className="order" href="">Z/A</a>
               </div>
               <nav className="paginate">
                 

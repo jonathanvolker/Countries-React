@@ -8,7 +8,7 @@ border-radius:5px;
 overflow: hidden;
 box-shadow:0 0 7px 2px rgba(0,0,0,.03);
 background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+background: linear-gradient(90deg, rgba(136,148,240,1) 0%, rgba(106,120,227,1) 39%, rgba(55,71,191,1) 100%);
 
 .img{
     width:50%;
