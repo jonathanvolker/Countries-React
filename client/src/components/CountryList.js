@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import Country from './Country';
 import {getCountries} from "../redux/actions";
-import CountryListStyled  from"../styledComponents/CountryListStyled"
+import CountryListStyled  from "../styledComponents/CountryListStyled"
 
 
 function CountryList (){
@@ -128,7 +128,10 @@ const changeValidation=()=>{
                            */} </option>
                      </select>
                      <button className="butt" type="submit"> Aplicar</button>
-                </label>
+                     <br/>
+                     <a className="act" href="http://localhost:3000/activity">agregar nueva actividad Turistica</a>
+               
+                     </label>
                 
             </form>
             </div>
@@ -200,6 +203,56 @@ const changeValidation=()=>{
     return(
         
       <CountryListStyled>
+                 <nav >
+           <div className="form-div" >
+            <form className="form-c" >
+                <header className="head"> Busque un Pais por su nombre</header>
+                <br/>
+                <label htmlFor="pais">
+                    Pais:
+                    <input type="text" 
+                           className="countryInput" 
+                           name="nombre" 
+                           placeholder="ingrese pais..."
+                           
+                           />
+                    <button className="butt"
+                            value="Buscar"
+                            > Buscar</button>                   
+                </label>
+                <label>
+                     <br/>
+                     <br/>
+                     Filtrar continente:
+                     <select name="continente">
+                         <option>Asia</option>
+                         <option>Europ</option>
+                         <option>Africa</option>
+                         <option>Oceania</option>
+                         <option>Americas</option>
+                         <option>Polar</option>
+
+                     </select>
+                     <button className="butt" type="submit">Aplicar</button>
+                </label>
+                <label>
+                     <br/>
+                    
+                     Filtrar actividad:
+                     <select name="actividad">
+                         <option>Actividad{/** aca iria el mapeo de la 
+                           actvidad turistica
+                           */} </option>
+                     </select>
+                     <button className="butt" type="submit"> Aplicar</button>
+                     <br/>
+                     <a className="act" href="http://localhost:3000/activity">agregar nueva actividad Turistica</a>
+                </label>
+                
+            </form>
+            </div>
+            </nav>
+
               <h1>Todos los paises</h1>
               <div className="navOrder">
                   <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>

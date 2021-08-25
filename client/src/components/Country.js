@@ -30,7 +30,7 @@ function Country({name, flag,region,subregion, area, population,ID}) {
                 <input onClick={changeValidation}  className="mfInput" type="submit"  value="Mas informacion"/>
                 <br/>
                 <br/>
-                <input className="mfInput" type="submit" value="agregar actividad turistica"/>
+                
              </div>
         </CountryStyled>
     </>
@@ -51,7 +51,7 @@ function Country({name, flag,region,subregion, area, population,ID}) {
                 <p> <strong> id de pais: {ID}</strong> </p> 
 
                 <br/>
-                <input className="mfInput" type="submit"  value="agregar actividad turistica"/>
+                
 
             </div>
         </CountryStyled>

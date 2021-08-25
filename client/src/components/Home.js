@@ -9,7 +9,7 @@ function Home(){
         <HomeStyled> 
            <div className="container">
               
-                <CountryList state={false} />
+                <CountryList />
             </div>
         </HomeStyled>
     )

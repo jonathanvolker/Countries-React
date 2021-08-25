@@ -92,6 +92,21 @@ padding:4em 2em;
     color: #0FA2DD ;
     background-color: #ffffff;
 }
+.act{
+  text-decoration: none;
+  font-weight: 50px;
+  font-size: 17px;
+  color: black;
+  background-color: #0FA2DD ;
+  border-radius: 6px;
+  border: 1px solid black;
+  margin-left:1px;
+  transition-duration: 0.3s;
+}
+.act:hover{
+  color: #0FA2DD ;
+    background-color: #ffffff;
+}
 `;
 
 export default CountryListStyled;
