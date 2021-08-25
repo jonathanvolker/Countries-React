@@ -1,73 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import styled from "styled-components";
 import { useSelector,useDispatch } from 'react-redux';
 import Country from './Country';
-
-import {getCountries} from "../redux/actions"
-
-
-const CountryListStyled=styled.div`
-display:flex;
-flex-direction: column;
-
-justify-content: center;
-align-items: center;
-
-//border: 1px solid;
-padding:4em 2em;
-//background: linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-.paginate{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-}
-  
-.boton_personalizado1{
-    text-decoration: none;
-    padding: 5px;
-    font-weight: 50px;
-    font-size: 10px;
-    color: black;
-    //background-color: #1883ba;
-    border-radius: 6px;
-    border: 1px solid black;
-    margin-left: 55px;
-  }
-.boton_personalizado{
-  
-    text-decoration: none;
-    padding: 5px;
-    font-weight: 50px;
-    font-size: 10px;
-    color: black;
-    background:#0FA2DD ;
-    border-radius: 6px;
-    border: 1px solid black;
-    
-    
-  }
-  .boton_personalizado:hover{
-    color: #1883ba;
-    background-color: #ffffff;
-  }
-.form-group{
-  display: inline; }
-  
-.countryOrder{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-}
-.navOrder{
- display: flex;
- flex-direction: row;
-  }
-.order{
-  text-decoration: none;
-}
-`;
+import {getCountries} from "../redux/actions";
+import CountryListStyled  from"../styledComponents/CountryListStyled"
 
 
 function CountryList (){
@@ -80,7 +15,7 @@ useEffect(()=>{
 },[getCountries])
 
 const [orden,setOrden]=useState(false)
-
+//funciones para invertir array de paises
 const invert=()=>{
   posts.sort(function (a, b) {
     if (a.name > b.name) {
@@ -106,7 +41,7 @@ const invert2=()=>{
   });
 
 }
-
+//funciones cambio de orden
 const changeOrdenZA=()=>{
   setOrden(true);
   invert();
@@ -150,6 +85,56 @@ const changeValidation=()=>{
     return(
         
       <CountryListStyled>
+        <nav >
+           
+           <div className="form-div" >
+            <form className="form-c" >
+                <header className="head"> Busque un Pais por su nombre</header>
+                <br/>
+                <label htmlFor="pais">
+                    Pais:
+                    <input type="text" 
+                           className="countryInput" 
+                           name="nombre" 
+                           placeholder="ingrese pais..."
+                           
+                           />
+                    <button className="butt"
+                            value="Buscar"
+                            > Buscar</button>                   
+                </label>
+                <label>
+                     <br/>
+                     <br/>
+                     Filtrar continente:
+                     <select name="continente">
+                         <option>Asia</option>
+                         <option>Europ</option>
+                         <option>Africa</option>
+                         <option>Oceania</option>
+                         <option>Americas</option>
+                         <option>Polar</option>
+
+                     </select>
+                     <button className="butt" type="submit">Aplicar</button>
+                </label>
+                <label>
+                     <br/>
+                    
+                     Filtrar actividad:
+                     <select name="actividad">
+                         <option>Actividad{/** aca iria el mapeo de la 
+                           actvidad turistica
+                           */} </option>
+                     </select>
+                     <button className="butt" type="submit"> Aplicar</button>
+                </label>
+                
+            </form>
+            </div>
+            </nav>
+
+
          <h1>Todos los paises</h1>
          <div className="navOrder">
               <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>

@@ -76,7 +76,7 @@ function Nav(){
     
     return(
         <NavStyled> 
-            <nav >
+          <nav >
            
            <div className="form-div" >
             <form onSubmit={enviarDatos} className="form-c" >

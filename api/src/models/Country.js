@@ -11,8 +11,6 @@ module.exports = (sequelize) => {
       unique:true,
       primaryKey:true,
       
-      
-      
     },
     name: {
       type: DataTypes.STRING,

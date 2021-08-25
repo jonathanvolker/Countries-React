@@ -47,6 +47,7 @@ router.get("/countries", async(req, res) => {
                                                     } })
     
     });
+
     Promise.all(countries)
       .then(async () => {
         const allCountries = await Country.findAll();
@@ -74,9 +75,10 @@ router.post("/activity" , async(req, res) => {
 {/*Recibe los datos recolectados desde el formulario
     controlado de la ruta de creación de actividad turística por body
     Crea una actividad turística en la base de datos */}
-    const { name,dificultad, duracion,temporada} = req.body;
+    const {name,dificultad, duracion,temporada} = req.body;
    
     try {
+       
         const newActivity = await Activity.create({
         
           name,
@@ -85,10 +87,11 @@ router.post("/activity" , async(req, res) => {
           temporada
 
           });
-        res.json(newActivity);
         
-        console.log("actividad")
-      } catch (error) {
+        
+        //console.log("actividad")
+      } 
+      catch (error) {
         res.send(error);
       }
       
