@@ -24,7 +24,7 @@ export const getCountry = (n) =>
             Promise.all(data)
                .then(obj => {
                     dispatch({ type: "GET_COUNTRY", payload: obj });
-                    console.log("UN SOLO PAIS",obj)
+                   // console.log("UN SOLO PAIS",obj)
               }
         );
     }

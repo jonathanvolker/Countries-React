@@ -15,6 +15,9 @@ padding:4em 2em;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 
 }
   

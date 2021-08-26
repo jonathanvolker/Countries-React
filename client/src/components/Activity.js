@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import ActivityStyled from '../styledComponents/ActivityStyled'
 import { useSelector,useDispatch } from 'react-redux';
 import {getCountry} from "../redux/actions"
@@ -15,8 +15,6 @@ export default function Activity() {
     temporada:""
   })
 
-
-
   const handleInputChange = function(e) {
     
     setInput({ ...input, [e.target.name]: e.target.value
@@ -24,22 +22,29 @@ export default function Activity() {
                         //y e.target.name seria lo escrito en el input en tiempo real
     });
   }
+
   const handleInputCountry= (e)=> {
-    
-    setInput({ ...input, [e.target.name]: e.target.value
-                         
-    });
-    
-    
-    
+     setInput({ ...input, [e.target.name]: e.target.value
+     });
+     
   }
 
  
-const prueba= ()=>{
-    
+  useEffect(()=>{
+    console.log(findCountry)
+      if(findCountry.length){
+        setCountry(true)
+        
+      }
+  },[findCountry])
+
+  const prueba= ()=>{
     dispatch(getCountry(input.pais))
+    console.log(findCountry)
     
 }
+
+
 
 const handleSubmit= (e)=> {
     e.preventDefault();

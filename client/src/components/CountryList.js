@@ -24,7 +24,7 @@ const invert=()=>{
     if (a.name < b.name) {
       return 1;
     }
-    // a must be equal to b
+    
     return 0;
   });
 }
@@ -36,7 +36,7 @@ const invert2=()=>{
     if (a.name < b.name) {
       return -1;
     }
-    // a must be equal to b
+    
     return 0;
   });
 
@@ -139,15 +139,15 @@ const changeValidation=()=>{
 
 
          <h1>Todos los paises</h1>
-         <div className="navOrder">
+         <div key="secondID" className="navOrder">
               <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
-              <button key="a" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
+              <button key="b" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
          </div>
          <nav className="paginate">
             <ul>
               { pageNumbers.map((number)=>{
                   return ( 
-                      <a className="boton_personalizado"
+                      <a key={number} className="boton_personalizado"
                       onClick={()=> paginate(number) }>
                         {number} 
                       </a>
@@ -156,12 +156,12 @@ const changeValidation=()=>{
               }
               </ul>
          </nav>
-         <div className="countryOrder">
+         <div key="uniqueID" className="countryOrder">
            {
          currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {
            return (
            <>
-              <div className="country">
+              <div key={name} className="country">
                   <Country
                     key={name}
                     flag={flag}
@@ -185,7 +185,7 @@ const changeValidation=()=>{
     currentPost.map(({ name, flag,continent }) => {
       return (<>
       
-        <div className="country">
+        <div key={name} className="country">
              <Country
               key={name}
               flag={flag}
@@ -256,7 +256,7 @@ const changeValidation=()=>{
               <h1>Todos los paises</h1>
               <div className="navOrder">
                   <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
-                  <button key="a" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
+                  <button key="b" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
               </div>
               <nav className="paginate">
                  <ul>
@@ -264,7 +264,7 @@ const changeValidation=()=>{
                      pageNumbers.map((number)=>{
                          return ( 
                          
-                             <a className="boton_personalizado"
+                             <a key={number} className="boton_personalizado"
                              onClick={()=> paginate(number) } >
                                {number} 
                              </a>
@@ -273,11 +273,11 @@ const changeValidation=()=>{
                      }
                  </ul>
               </nav>
-            <div className="countryOrder">
+            <div key="uniqueID" className="countryOrder">
               {currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {
                   return (
                   <>
-                    <div className="country">
+                    <div key={name} className="country">
                         <Country
                           key={name}
                           flag={flag}
@@ -303,7 +303,7 @@ const changeValidation=()=>{
     currentPost.map(({ name, flag,continent }) => {
       return (
       <>
-        <div className="country">
+        <div key={name} className="country">
             <Country
               key={name}
               flag={flag}
