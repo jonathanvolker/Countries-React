@@ -53,7 +53,10 @@ function Nav(){
 const [state1,setState1]=useState(true)
 const [state2,setState2]=useState(true)
 const[state3,setState3]=useState(true)
-const [continent,setContinent]=useState({value:""})
+const[notCountry, setNoCountry]=useState(false)
+const [continent,setContinent]=useState( {
+    value : ""
+})
 const[navState,setNavState]=useState(true)
 
 const all=async()=>{
@@ -67,13 +70,15 @@ const [input,setInput] =useState({
 
 const selectContinent=(e)=>{
     setContinent(e.target.value)
+    
 }
 
 const takeContinent=()=>{
     dispatch(getCountriesPerContinent(continent))
-    setState3(false)
-    setNavState(false)
+    //setNavState(false)
+    //setState3(false)
 }
+
 
 const handleInputCountry= (e)=> {
     setInput({ ...input, [e.target.name]: e.target.value
@@ -89,10 +94,36 @@ const handleSubmit= (e)=> {
 var findCountry= useSelector((state)=>state.Country)
 var findContinent=useSelector((state)=>state.CountryContinent)
 
+useEffect(()=>{
+    if(typeof(findContinent[0])== "object"){
+        console.log("entro al use")
+    }
+},[findContinent])
+
+
+useEffect(()=>{
+    if(input.pais.length){
+       
+        if(typeof(input.pais.length && findCountry[0])=="object"){
+            
+        //    console.log("primer if")
+            if(findCountry[0].name==input.pais){
+            setNavState(false)
+            setState2(false)
+            setNoCountry(false)}
+        }else{
+        
+            setState2(false)
+            setNavState(false)
+            setNoCountry(true)
+        }
+             
+    } 
+},[findCountry])
 const oneCountry= ()=>{
 dispatch(getCountry(input.pais))
-setState2(false)
-setNavState(false)
+
+
 }     
 const back=()=>{
     setNavState(true)
@@ -100,8 +131,11 @@ const back=()=>{
     
     setInput({pais:""})
 }
+const redirect=()=>{
+    setTimeout(()=>{window.location.replace("http://localhost:3000/home")}, 1500)
+}
  
-    if(navState){
+    if(navState){// solo la nav
     return(
         <>
         
@@ -125,12 +159,13 @@ const back=()=>{
                   
                 </label>
                <br/>
+               
                                        Filtrar continente:
                   
                         <select name="continente" value={continent.value} onChange={selectContinent}>
                             <option defaultValue="selected"></option>
                             <option value="Asia">Asia</option>
-                            <option value="Europ" >Europ</option>
+                            <option value="Europe" >Europe</option>
                             <option value="Africa" >Africa</option>
                             <option value="Oceania" >Oceania</option>
                             <option value="Americas" >Americas</option>
@@ -140,7 +175,7 @@ const back=()=>{
                         <button className="butt"type="button" value="Enviar" onClick={takeContinent} >Aplicar</button>
                     
 
-                     
+                      
 
                 
                 <label>
@@ -169,11 +204,63 @@ const back=()=>{
         </>
         )
 }
-if(!navState & !state2){
-  return(
+if(!navState && !state1){ // todos los paises
+    return (
+        <NavStyled>
+            <button className="butt" onClick={back} >volver</button>
+            <CountryList/>
+        </NavStyled>
+        
+    )
+}
+
+if(!navState & !state2){//1 solo pais
+
+        if(!navState && notCountry){ //si el paies no existe
+            return(
+                <NavStyled>
+
+                 
+                 <div>Pais no encontrado</div>
+                { redirect()}
+
+                </NavStyled>
+            )
+        }
+
+       if(!navState && !notCountry) {//si el pais existe
+            return(
+                    <>
+                    {
+                    findCountry.map(({ subregion,name, flag,continent, area, population,ID }) => {
+                    return (
+                        <div key={name} className="country">
+                            <button className="butt" onClick={back}>Volver</button>
+                            
+                            <Country
+                                key={name}
+                                flag={flag}
+                                name={name}
+                                region={continent}
+                                subregion={subregion}
+                                area={area}
+                                population={population}
+                                ID={ID}
+                                />
+                        </div>
+                    
+                    )
+                    })
+                }
+                </>
+                    )
+  }          
+}
+if(!navState & !state3){ //paises por continente
+    return(
         <>
            {
-         findCountry.map(({ subregion,name, flag,continent, area, population,ID }) => {
+         findContinent.map(({ subregion,name, flag,continent, area, population,ID }) => {
            return (
               <div key={name} className="country">
                   <button onClick={back}>Volver</button>
@@ -195,25 +282,8 @@ if(!navState & !state2){
        }
        </>
         )
-   
-}
-if(!navState & !state3){
-    return(
-          <>
-          <div>paises por continente</div>
-         </>
-          )
-     
   }
-if(!navState && !state1){
-    return (
-        <NavStyled>
-            <button className="butt" onClick={back} >volver</button>
-            <CountryList/>
-        </NavStyled>
-        
-    )
-}
+
 
 
 }

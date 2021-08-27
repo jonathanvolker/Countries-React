@@ -7,11 +7,7 @@ import Nav from './Nav';
 import CountryStyled from '../styledComponents/CountryStyled';
 
 function CountryList (){
-  //para traer los pases del strore
-const[navState,setNavState]=useState(true)
-const all=()=>{
-  setNavState(false)
-}
+
 const dispatch=useDispatch(); 
 const posts= useSelector((state)=>state.CountryList)
 useEffect(()=>{
@@ -22,20 +18,6 @@ useEffect(()=>{
 const [orden,setOrden]=useState(false)
 
 ////////manejo de inputs
-const[input,setInput]=useState({
-  pais:""
-})
-const handleInputCountry= (e)=> {
-  setInput({ ...input, [e.target.name]: e.target.value
-  }); 
-}
-
-const handleSubmit= (e)=> {
-  e.preventDefault();
-}
-const prueba=()=>{
-  dispatch(getCountry(input.pais))
-}
 
 ///////////////////
 //funciones para invertir array de paises
@@ -68,12 +50,12 @@ const invert2=()=>{
 const changeOrdenZA=()=>{
   setOrden(true);
   invert();
-  console.log(posts)
+  
 }
 const changeOrdenAZ=()=>{
   setOrden(false);
   invert2();
-  console.log(posts)
+ 
 }
 
 //seteo estado para iniciar lista

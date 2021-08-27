@@ -8,7 +8,7 @@ export const getCountries = () =>
     Promise.all(data)
        .then(obj => {
             dispatch({ type: "GET_COUNTRIES", payload: obj });
-            //console.log("este es mi obj en action",obj)
+            console.log("listado de paises en action",obj)
       }
     );
 }
@@ -16,16 +16,17 @@ export const getCountries = () =>
 
 
 export const getCountry = (n) => 
-        //obtengo el obj de pais pero por id
-        async(dispatch) =>{
-            const response= await fetch("http://localhost:3001/countries?name="+n)
-            const data= await response.json();
-            //console.log("unico pais",data)
-            Promise.all(data)
-               .then(obj => {
-                    dispatch({ type: "GET_COUNTRY", payload: obj });
-                    console.log("UN SOLO PAIS",obj)
-              }
+    //obtengo el obj de pais pero por id
+    async(dispatch) =>{
+        const name= n.charAt(0).toUpperCase() + n.slice(1);
+        const response= await fetch("http://localhost:3001/countries?name="+name)
+        const data= await response.json();
+        //console.log("unico pais",data)
+        Promise.all(data)
+            .then(obj => {
+                dispatch({ type: "GET_COUNTRY", payload: obj });
+                console.log("UN SOLO PAIS",obj)
+            }
         );
     }
  
@@ -42,7 +43,7 @@ export const getCountriesPerContinent = (continent) =>
 
         )//console.log(c)
             dispatch({ type: "GET_COUNTRIES_CONTINENT", payload: c });
-            //console.log("este es mi obj en action",c)
+            console.log("listado de continente",c)
       }
     );
 }
