@@ -4,7 +4,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import {getCountry} from "../redux/actions"
 export default function Activity() {
     
- const [initialState, setInitialState]=useState(false)   
+const [initialState, setInitialState]=useState(false)   
 const [secondState,setSecondState]=useState(false)
  //controladores de imputs
  const [input,setInput] =useState({
@@ -14,7 +14,7 @@ const [secondState,setSecondState]=useState(false)
     duracion:"",
     temporada:""
   })
-
+  
   const handleInputChange = function(e) {
     
     setInput({ ...input, [e.target.name]: e.target.value
@@ -36,13 +36,13 @@ const handleSubmit= (e)=> {
 //verificacion de pais e ingreso de actividad
 const dispatch=useDispatch(); 
 
-var findCountry= useSelector((state)=>state.CountryDetail)
+var findCountry= useSelector((state)=>state.Country)
 useEffect(()=>{
- //   console.log(findCountry)
-      if(findCountry.length){
+    console.log(findCountry)
+       if(findCountry.length){
         setInitialState(true)
         
-    }
+    } 
     if(input.pais.length){
         if(input.pais !== findCountry[0])
         setSecondState(true)

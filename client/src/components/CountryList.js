@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import Country from './Country';
-import {getCountries} from "../redux/actions";
+import {getCountries, getCountry} from "../redux/actions";
 import CountryListStyled  from "../styledComponents/CountryListStyled"
-
+import Nav from './Nav';
+import CountryStyled from '../styledComponents/CountryStyled';
 
 function CountryList (){
   //para traer los pases del strore
+const[navState,setNavState]=useState(true)
+const all=()=>{
+  setNavState(false)
+}
 const dispatch=useDispatch(); 
 const posts= useSelector((state)=>state.CountryList)
 useEffect(()=>{
@@ -15,6 +20,24 @@ useEffect(()=>{
 },[getCountries])
 
 const [orden,setOrden]=useState(false)
+
+////////manejo de inputs
+const[input,setInput]=useState({
+  pais:""
+})
+const handleInputCountry= (e)=> {
+  setInput({ ...input, [e.target.name]: e.target.value
+  }); 
+}
+
+const handleSubmit= (e)=> {
+  e.preventDefault();
+}
+const prueba=()=>{
+  dispatch(getCountry(input.pais))
+}
+
+///////////////////
 //funciones para invertir array de paises
 const invert=()=>{
   posts.sort(function (a, b) {
@@ -54,7 +77,7 @@ const changeOrdenAZ=()=>{
 }
 
 //seteo estado para iniciar lista
-const [state,setState]=useState([false]);
+const [state,setState]=useState(false);
 
 //seteo cantidades a la lista
 const [currentPage,setCurrentPage]=useState(1);
@@ -80,64 +103,12 @@ const changeValidation=()=>{
 
 
   if(orden==false){
-  if(state[0] === false){
+  if(state === false){
       
     return(
         
       <CountryListStyled>
-        <nav >
-           
-           <div className="form-div" >
-            <form className="form-c" >
-                <header className="head"> Busque un Pais por su nombre</header>
-                <br/>
-                <label htmlFor="pais">
-                    Pais:
-                    <input type="text" 
-                           className="countryInput" 
-                           name="nombre" 
-                           placeholder="ingrese pais..."
-                           
-                           />
-                    <button className="butt"
-                            value="Buscar"
-                            > Buscar</button>                   
-                </label>
-                <label>
-                     <br/>
-                     <br/>
-                     Filtrar continente:
-                     <select name="continente">
-                         <option>Asia</option>
-                         <option>Europ</option>
-                         <option>Africa</option>
-                         <option>Oceania</option>
-                         <option>Americas</option>
-                         <option>Polar</option>
-
-                     </select>
-                     <button className="butt" type="submit">Aplicar</button>
-                </label>
-                <label>
-                     <br/>
-                    
-                     Filtrar actividad:
-                     <select name="actividad">
-                         <option>Actividad{/** aca iria el mapeo de la 
-                           actvidad turistica
-                           */} </option>
-                     </select>
-                     <button className="butt" type="submit"> Aplicar</button>
-                     <br/>
-                     <a className="act" href="http://localhost:3000/activity">agregar nueva actividad Turistica</a>
-               
-                     </label>
-                
-            </form>
-            </div>
-            </nav>
-
-
+         
          <h1>Todos los paises</h1>
          <div key="secondID" className="navOrder">
               <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
@@ -198,60 +169,12 @@ const changeValidation=()=>{
      ) })
   }
  }else{
-  if(state[0] === false){
+  if(state === false){
       
     return(
         
       <CountryListStyled>
-                 <nav >
-           <div className="form-div" >
-            <form className="form-c" >
-                <header className="head"> Busque un Pais por su nombre</header>
-                <br/>
-                <label htmlFor="pais">
-                    Pais:
-                    <input type="text" 
-                           className="countryInput" 
-                           name="nombre" 
-                           placeholder="ingrese pais..."
-                           
-                           />
-                    <button className="butt"
-                            value="Buscar"
-                            > Buscar</button>                   
-                </label>
-                <label>
-                     <br/>
-                     <br/>
-                     Filtrar continente:
-                     <select name="continente">
-                         <option>Asia</option>
-                         <option>Europ</option>
-                         <option>Africa</option>
-                         <option>Oceania</option>
-                         <option>Americas</option>
-                         <option>Polar</option>
-
-                     </select>
-                     <button className="butt" type="submit">Aplicar</button>
-                </label>
-                <label>
-                     <br/>
-                    
-                     Filtrar actividad:
-                     <select name="actividad">
-                         <option>Actividad{/** aca iria el mapeo de la 
-                           actvidad turistica
-                           */} </option>
-                     </select>
-                     <button className="butt" type="submit"> Aplicar</button>
-                     <br/>
-                     <a className="act" href="http://localhost:3000/activity">agregar nueva actividad Turistica</a>
-                </label>
-                
-            </form>
-            </div>
-            </nav>
+            
 
               <h1>Todos los paises</h1>
               <div className="navOrder">
@@ -320,7 +243,7 @@ const changeValidation=()=>{
   
   
   }
- }   
+ } 
 }
 
 

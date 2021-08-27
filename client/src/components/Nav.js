@@ -1,8 +1,9 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import {getCountry} from "../redux/actions"
-
+import { useDispatch,useSelector } from 'react-redux';
+import {getCountry,getCountriesPerContinent} from "../redux/actions"
+import CountryList from './CountryList'
+import Country from "./Country"
  
 const NavStyled=styled.div`
 
@@ -48,67 +49,100 @@ nav{
 `
  
 function Nav(){
-    const dispatch=useDispatch();
-  
-    const [datos, setDatos] = useState({
-        nombre: ''
-    })
-
-
-    const handleInputChange = (event) => {
-        // console.log(event.target.name)
-        // console.log(event.target.value)
-        setDatos({
-            ...datos,
-            [event.target.name] : event.target.value
-        })
-    }
-    const buscar= (e)=>{
-        dispatch(getCountry(datos))
-        //console.log(datos)
-        e.preventDefault()
-    }
-
-    const enviarDatos = (event) => {
-        event.preventDefault()
-        //console.log('enviando datos...' + datos.nombre)
-    }
     
+const [state1,setState1]=useState(true)
+const [state2,setState2]=useState(true)
+const[state3,setState3]=useState(true)
+const [continent,setContinent]=useState({value:""})
+const[navState,setNavState]=useState(true)
+
+const all=async()=>{
+    setNavState(false)
+    setState1(false)
+}
+
+const [input,setInput] =useState({
+    pais:""
+})
+
+const selectContinent=(e)=>{
+    setContinent(e.target.value)
+}
+
+const takeContinent=()=>{
+    dispatch(getCountriesPerContinent(continent))
+    setState3(false)
+    setNavState(false)
+}
+
+const handleInputCountry= (e)=> {
+    setInput({ ...input, [e.target.name]: e.target.value
+});
+    }
+
+    
+const handleSubmit= (e)=> {
+    e.preventDefault();
+ }
+
+ const dispatch=useDispatch();
+var findCountry= useSelector((state)=>state.Country)
+var findContinent=useSelector((state)=>state.CountryContinent)
+
+const oneCountry= ()=>{
+dispatch(getCountry(input.pais))
+setState2(false)
+setNavState(false)
+}     
+const back=()=>{
+    setNavState(true)
+    setState2(true)
+    
+    setInput({pais:""})
+}
+ 
+    if(navState){
     return(
+        <>
+        
         <NavStyled> 
-          <nav >
+        <nav >
            
-           <div className="form-div" >
-            <form onSubmit={enviarDatos} className="form-c" >
+           <div className="form-div"onSubmit={handleSubmit} >
+            <form className="form-c"  >
                 <header className="head"> Busque un Pais por su nombre</header>
                 <br/>
                 <label htmlFor="pais">
                     Pais:
                     <input type="text" 
                            className="countryInput" 
-                           name="nombre" 
+                           name="pais" 
                            placeholder="ingrese pais..."
-                           onChange={handleInputChange}
+                           value={input.pais}
+                           onChange={handleInputCountry}
                            />
-                    <button className="butt"
-                            value="Buscar"
-                            onClick={buscar}> Buscar</button>                   
+                    <button className="butt" type="submit" value="Submit" onClick={oneCountry} >buscar</button>
+                  
                 </label>
-                <label>
-                     <br/>
-                     <br/>
-                     Filtrar continente:
-                     <select name="continente">
-                         <option>Asia</option>
-                         <option>Europ</option>
-                         <option>Africa</option>
-                         <option>Oceania</option>
-                         <option>Americas</option>
-                         <option>Polar</option>
+               <br/>
+                                       Filtrar continente:
+                  
+                        <select name="continente" value={continent.value} onChange={selectContinent}>
+                            <option defaultValue="selected"></option>
+                            <option value="Asia">Asia</option>
+                            <option value="Europ" >Europ</option>
+                            <option value="Africa" >Africa</option>
+                            <option value="Oceania" >Oceania</option>
+                            <option value="Americas" >Americas</option>
+                            <option value="Polar" >Polar</option>
 
-                     </select>
-                     <button className="butt" type="submit">Aplicar</button>
-                </label>
+                        </select>
+                        <button className="butt"type="button" value="Enviar" onClick={takeContinent} >Aplicar</button>
+                    
+
+                     
+
+                
                 <label>
                      <br/>
                     
@@ -119,13 +153,69 @@ function Nav(){
                            */} </option>
                      </select>
                      <button className="butt" type="submit"> Aplicar</button>
+                     <br/>
+                      <a className="butt" href="http://localhost:3000/activity">agregar una actividad turistica</a>
                 </label>
-                
+                <br/>
+                <br/>
+                <br/>
+               <button className="butt" onClick={all} >Mostrar todos los paises</button>
             </form>
             </div>
             </nav>
+            
         </NavStyled>
+        
+        </>
+        )
+}
+if(!navState & !state2){
+  return(
+        <>
+           {
+         findCountry.map(({ subregion,name, flag,continent, area, population,ID }) => {
+           return (
+              <div key={name} className="country">
+                  <button onClick={back}>Volver</button>
+                  
+                  <Country
+                    key={name}
+                    flag={flag}
+                    name={name}
+                    region={continent}
+                    subregion={subregion}
+                    area={area}
+                    population={population}
+                    ID={ID}
+                    />
+               </div>
+           
+           )
+         })
+       }
+       </>
+        )
+   
+}
+if(!navState & !state3){
+    return(
+          <>
+          <div>paises por continente</div>
+         </>
+          )
+     
+  }
+if(!navState && !state1){
+    return (
+        <NavStyled>
+            <button className="butt" onClick={back} >volver</button>
+            <CountryList/>
+        </NavStyled>
+        
     )
+}
+
+
 }
 
 export default Nav;
