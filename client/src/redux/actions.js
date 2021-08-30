@@ -8,7 +8,7 @@ export const getCountries = () =>
     Promise.all(data)
        .then(obj => {
             dispatch({ type: "GET_COUNTRIES", payload: obj });
-            console.log("listado de paises en action",obj)
+           // console.log("listado de paises en action",obj)
       }
     );
 }
@@ -25,27 +25,30 @@ export const getCountry = (n) =>
         Promise.all(data)
             .then(obj => {
                 dispatch({ type: "GET_COUNTRY", payload: obj });
-                console.log("UN SOLO PAIS",obj)
+                //console.log("UN SOLO PAIS",obj)
             }
         );
     }
  
-export const getCountriesPerContinent = (continent) => 
+ export const getActivities= () => 
  async(dispatch) =>{
-    const response= await fetch("http://localhost:3001/countries")
+    const response= await fetch("http://localhost:3001/activities")
     const data= await response.json();
     //console.log("data eng action",data)
     Promise.all(data)
        .then(obj => {
 
-      const c= obj.filter(o=>
-                o.continent === continent
-
-        )//console.log(c)
-            dispatch({ type: "GET_COUNTRIES_CONTINENT", payload: c });
-            console.log("listado de continente desde actions",c)
+      //console.log(c)
+            dispatch({ type: "SET_ACTIVITY", payload: obj});
+            console.log("listado activities desde actions",obj)
       }
-    );
+    )
+}
+export const continentState = (continent)=>{
+ return {
+     type : "SET_CONTINENT",
+     payload:continent
+ }
 }
 
 

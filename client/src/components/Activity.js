@@ -39,12 +39,12 @@ const addActivity=async()=>{
     headers:{ "Content-Type": "application/json"},
     body: JSON.stringify(body)
 })
-console.log(JSON.stringify(body))
+
 }    
 //verificacion de pais e ingreso de actividad
 const dispatch=useDispatch(); 
 
-var findCountry= useSelector((state)=>state.Country)
+var findCountry= useSelector((state)=>state.Countries)
 useEffect(()=>{
     console.log(findCountry)
        if(findCountry.length){

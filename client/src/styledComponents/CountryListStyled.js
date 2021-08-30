@@ -9,7 +9,7 @@ justify-content: center;
 align-items: center;
 font-family: 'Courier New', Courier, monospace;
 //border: 1px solid;
-padding:4em 2em;
+//padding:4em 2em;
 //background: linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
 .paginate{
   display: flex;

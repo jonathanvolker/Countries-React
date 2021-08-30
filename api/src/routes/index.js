@@ -72,6 +72,13 @@ router.get("/countries/:ID", async(req, res) => {
 
 
 
+router.get("/activities", async(req, res)=>{
+ const activities= await Activity.findAll();
+
+ Promise.all(activities)
+ .then(data => res.json(data))
+ 
+})
 
 router.get("/activity", async(req, res)=>{
   const{ name} =req.body;

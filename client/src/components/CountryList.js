@@ -4,20 +4,33 @@ import Country from './Country';
 import {getCountries, getCountry} from "../redux/actions";
 import CountryListStyled  from "../styledComponents/CountryListStyled"
 import Nav from './Nav';
-import CountryStyled from '../styledComponents/CountryStyled';
 
 function CountryList (){
-
-const dispatch=useDispatch(); 
-const posts= useSelector((state)=>state.CountryList)
-useEffect(()=>{
-  dispatch(getCountries())
  
-},[getCountries])
+
+  
+
+const post= useSelector((state)=>state.Countries)
+
+const [posts,setPosts]=useState(post)
 
 const [orden,setOrden]=useState(false)
 
-////////manejo de inputs
+const continent = useSelector((state)=> state.Continent)
+console.log(continent)
+console.log(posts)
+useEffect(()=>{
+  
+if(continent.length){
+  let countriesPerContinent= posts.filter(country=>
+    country.continent === continent
+   )
+   //console.log(countriesPerContinent)
+   setPosts(countriesPerContinent)
+   //console.log(posts)
+  
+}
+},[continent])
 
 ///////////////////
 //funciones para invertir array de paises
@@ -120,12 +133,17 @@ const changeValidation=()=>{
 }
 
 
-  if(orden==false){
+  if(orden==false ){
   if(state === false){
-      
+     
     return(
         
-      <CountryListStyled>
+      
+
+
+      currentPost !== [] ? 
+
+     ( <CountryListStyled>
          
          <h1>Todos los paises</h1>
          <div key="secondID" className="navOrder">
@@ -150,8 +168,11 @@ const changeValidation=()=>{
          </nav>
          <div key="uniqueID" className="countryOrder">
            {
+            currentPost.length > 1 ?(
          currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {
-           return (
+         
+
+          return (
            <>
               <div key={name} className="country">
                   <Country
@@ -167,9 +188,22 @@ const changeValidation=()=>{
                </div>
            </>
            )
-         })
-       }</div>
-       </CountryListStyled>
+          }))  : (<Country 
+                      key={currentPost[0][0].ID}
+                      flag={currentPost[0][0].flag}
+                      name={currentPost[0][0].name}
+                      region={currentPost[0][0].continent}
+                      subregion={currentPost[0][0].subregion}
+                      area={currentPost[0][0].area}
+                      population={currentPost[0][0].population}
+                      ID={currentPost[0][0].ID}
+                  />
+                  
+                  )
+      }     </div>
+       </CountryListStyled>) : (
+         <div>pais no encontrado</div>
+       )
    )
   }
 
@@ -263,11 +297,9 @@ const changeValidation=()=>{
       )
     })
   
-  
-  
-  
   }
  } 
+
 }
 
 
