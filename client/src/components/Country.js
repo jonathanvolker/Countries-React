@@ -23,7 +23,7 @@ function Country({name, flag,region,subregion, area, population,ID}) {
              
              <img loading="lazy" src={flag} alt="" />
              <div className="details">
-                <h2> {name}</h2>
+                <h2 className="text"> {name}</h2>
                 
                 <p> <strong> Continente: {region}</strong> </p> 
                 <br/>
@@ -42,7 +42,7 @@ function Country({name, flag,region,subregion, area, population,ID}) {
              <img loading="lazy" src={flag} alt="" />
              <div className="details">
              <input onClick={changeValidationFalse} className="close" type="submit"  value="cerrar detalle"/>
-                <h2> {name}</h2>
+                <h2 className="text"> {name}</h2>
                 <br/>
                 <p> <strong> Continente: {region}</strong> </p> 
                 <p> <strong> Subregion: {subregion}</strong> </p> 

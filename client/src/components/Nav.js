@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import styled from 'styled-components';
 import { useDispatch,useSelector } from 'react-redux';
-import {getCountry,getCountriesPerContinent} from "../redux/actions"
+import {getCountry,getCountriesPerContinent, getCountries} from "../redux/actions"
 import CountryList from './CountryList'
 import Country from "./Country"
  
@@ -14,6 +14,14 @@ nav{
     background-repeat: repeat-x;
     
    
+}
+.t{
+    display: flex;
+    flex-direction:column ;
+    font-size:25px;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    
 }
 
 .form-div{
@@ -32,6 +40,11 @@ nav{
     height: 17px;
     border-radius: 6px;
 }
+.oneCountry{
+    display: flex;
+    flex-direction:column ;
+    
+}
 .butt{
  font-weight: 50px;
   font-size: 11px;
@@ -46,93 +59,86 @@ nav{
     color: #0FA2DD ;
     background-color: #ffffff;
 }
+.backButton{
+    display: flex;
+    justify-content:center;
+}
 `
- 
+
 function Nav(){
-    
+const dispatch=useDispatch();
+const[navState,setNavState]=useState(true)
 const [state1,setState1]=useState(true)
 const [state2,setState2]=useState(true)
-const[state3,setState3]=useState(true)
-const[notCountry, setNoCountry]=useState(false)
-const [continent,setContinent]=useState( {
-    value : ""
-})
-const[navState,setNavState]=useState(true)
+const [state3,setState3]=useState(true)
+const [notCountry, setNoCountry]=useState(false)//estado por si no hay paises
+const [notContinent,setNotContinent]=useState(false)//para el estado cargando del filtrado x continentes
+const [continent,setContinent]=useState( {value : "" })//input del select continente
+const [input,setInput] =useState({ pais: "" }) //input de 1 solo pais
+const findCountry= useSelector((state)=>state.Country)
+const findContinent=useSelector((state)=>state.CountryContinent)
 
-const all=async()=>{
+
+const all=async()=>{  //boton de mostrar todos
     setNavState(false)
     setState1(false)
 }
 
-const [input,setInput] =useState({
-    pais:""
-})
-
-const selectContinent=(e)=>{
+const selectContinent=(e)=>{ //seteador de continente para enviarlo al reducer
     setContinent(e.target.value)
-    
 }
 
-const takeContinent=()=>{
-    dispatch(getCountriesPerContinent(continent))
-    //setNavState(false)
-    //setState3(false)
-}
-
-
-const handleInputCountry= (e)=> {
+const handleInputCountry= (e)=> { //guardador de input de ingreso de un solo pais
     setInput({ ...input, [e.target.name]: e.target.value
-});
-    }
+});}
 
-    
 const handleSubmit= (e)=> {
     e.preventDefault();
  }
 
- const dispatch=useDispatch();
-var findCountry= useSelector((state)=>state.Country)
-var findContinent=useSelector((state)=>state.CountryContinent)
+const takeContinent=()=>{ //boton para submit del select continente
+    dispatch(getCountriesPerContinent(continent))
+        console.log("entro al take")
+         //setNavState(false)
+         //setState3(false)
+}
 
 useEffect(()=>{
-    if(typeof(findContinent[0])== "object"){
-        console.log("entro al use")
-    }
-},[findContinent])
-
-
-useEffect(()=>{
+   if(continent.value.length){
+        if(typeof(findContinent[0]=="object")){
+            setNavState(false)
+            setState3(false)
+            setNotContinent(true)
+ 
+ }else{ setNotContinent(true)}
+}
     if(input.pais.length){
-       
-        if(typeof(input.pais.length && findCountry[0])=="object"){
-            
-        //    console.log("primer if")
+        if(typeof( findCountry[0])=="object"){
             if(findCountry[0].name==input.pais){
             setNavState(false)
             setState2(false)
             setNoCountry(false)}
+
         }else{
-        
             setState2(false)
             setNavState(false)
             setNoCountry(true)
         }
-             
-    } 
-},[findCountry])
-const oneCountry= ()=>{
-dispatch(getCountry(input.pais))
+ } 
+},[findCountry,findContinent])
 
 
+const oneCountry= ()=>{ // submit de buscar un solo pais
+    dispatch(getCountry(input.pais))
 }     
-const back=()=>{
+
+const back=()=>{    //boton volver atras
     setNavState(true)
     setState2(true)
     
-    setInput({pais:""})
 }
 const redirect=()=>{
-    setTimeout(()=>{window.location.replace("http://localhost:3000/home")}, 1500)
+    setTimeout(()=>{window.location.replace("http://localhost:3000/home")}, 60000)
 }
  
     if(navState){// solo la nav
@@ -173,10 +179,6 @@ const redirect=()=>{
 
                         </select>
                         <button className="butt"type="button" value="Enviar" onClick={takeContinent} >Aplicar</button>
-                    
-
-                      
-
                 
                 <label>
                      <br/>
@@ -207,7 +209,9 @@ const redirect=()=>{
 if(!navState && !state1){ // todos los paises
     return (
         <NavStyled>
+            <div className="backButton">
             <button className="butt" onClick={back} >volver</button>
+            </div>
             <CountryList/>
         </NavStyled>
         
@@ -220,8 +224,11 @@ if(!navState & !state2){//1 solo pais
             return(
                 <NavStyled>
 
-                 
-                 <div>Pais no encontrado</div>
+                 <div className="t">
+                 <div className="t">Pais no encontrado</div>
+                 <br/>
+                 <div className="t"> redireccionando...</div>
+                 </div>
                 { redirect()}
 
                 </NavStyled>
@@ -234,7 +241,7 @@ if(!navState & !state2){//1 solo pais
                     {
                     findCountry.map(({ subregion,name, flag,continent, area, population,ID }) => {
                     return (
-                        <div key={name} className="country">
+                        <div key={name} className="oneCountry">
                             <button className="butt" onClick={back}>Volver</button>
                             
                             <Country
@@ -257,6 +264,17 @@ if(!navState & !state2){//1 solo pais
   }          
 }
 if(!navState & !state3){ //paises por continente
+    
+    if(!navState& notContinent){
+        return(
+            <NavStyled>
+            <div>
+                cargando
+            </div>
+            </NavStyled>
+        )
+    }
+ if(!navState&!notContinent){
     return(
         <>
            {
@@ -283,7 +301,7 @@ if(!navState & !state3){ //paises por continente
        </>
         )
   }
-
+}
 
 
 }

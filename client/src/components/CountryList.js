@@ -3,8 +3,6 @@ import { useSelector,useDispatch } from 'react-redux';
 import Country from './Country';
 import {getCountries, getCountry} from "../redux/actions";
 import CountryListStyled  from "../styledComponents/CountryListStyled"
-import Nav from './Nav';
-import CountryStyled from '../styledComponents/CountryStyled';
 
 function CountryList (){
 
@@ -44,8 +42,33 @@ const invert2=()=>{
     
     return 0;
   });
-
 }
+const changeP=()=>{
+  posts.sort(function (a, b) {
+    if (a.population > b.population) {
+      return -1;
+    }
+    if (a.population < b.population) {
+      return 1;
+    }
+    
+    return 0;
+  });
+}
+const changeP2=()=>{
+  posts.sort(function (a, b) {
+    if (a.population > b.population) {
+      return 1;
+    }
+    if (a.population < b.population) {
+      return -1;
+    }
+    
+    return 0;
+  });
+}
+
+
 //funciones cambio de orden
 const changeOrdenZA=()=>{
   setOrden(true);
@@ -57,7 +80,15 @@ const changeOrdenAZ=()=>{
   invert2();
  
 }
+const poblacionAsc=()=>{
+  setOrden(true)
+  changeP()
 
+}
+const poblacionDes=()=>{
+  setOrden(false)
+  changeP2()
+}
 //seteo estado para iniciar lista
 const [state,setState]=useState(false);
 
@@ -95,6 +126,9 @@ const changeValidation=()=>{
          <div key="secondID" className="navOrder">
               <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
               <button key="b" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
+              <button key="b" className="boton_personalizado" onClick={poblacionAsc} >Poblacion+ </button>
+              <button key="b" className="boton_personalizado" onClick={poblacionDes} >Poblacion- </button>
+
          </div>
          <nav className="paginate">
             <ul>
@@ -162,9 +196,12 @@ const changeValidation=()=>{
               <div className="navOrder">
                   <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
                   <button key="b" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
+                  <button key="b" className="boton_personalizado" onClick={poblacionAsc} >Poblacion+ </button>
+                  <button key="b" className="boton_personalizado" onClick={poblacionDes} >Poblacion- </button>
+
               </div>
               <nav className="paginate">
-                 <ul>
+                 <ul className="pagebuttons">
                    {
                      pageNumbers.map((number)=>{
                          return ( 

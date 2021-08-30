@@ -4,12 +4,11 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('country', {
-    
-    ID:{
+    ID:{   
       type: DataTypes.STRING,
       allowNull:false,
       unique:true,
-      primaryKey:true,
+      primaryKey:true
       
     },
     name: {
@@ -43,7 +42,11 @@ module.exports = (sequelize) => {
     },
     area:{
       type:DataTypes.STRING
-    }
+    },
+    
+    
 
+  },{
+       timestamps:false
   });
 };

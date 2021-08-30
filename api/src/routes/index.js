@@ -36,6 +36,7 @@ router.get("/countries", async(req, res) => {
     const data = await response.json();
     const countries = data.map( async (l) => {
     const country = await Country.findOrCreate({ where: { 
+    
                                                       ID:l.alpha3Code,
                                                       name:l.name,
                                                       flag:l.flag,
@@ -70,30 +71,49 @@ router.get("/countries/:ID", async(req, res) => {
 
 })
 
+router.get("/activity", async(req, res)=>{
+const {name}=req.query;
 
+const activities= await Activity.findAll()
+Promise.all(activities)
+.then(data=> res.json(data))
+
+})
 router.post("/activity" , async(req, res) => {
 {/*Recibe los datos recolectados desde el formulario
     controlado de la ruta de creación de actividad turística por body
     Crea una actividad turística en la base de datos */}
-    const {name,dificultad, duracion,temporada} = req.body;
-   
-    try {
-       
-        const newActivity = await Activity.create({
-        
-          name,
+    const {name,dificultad, duracion,temporada,countryName} = req.body;
+      const naMe=name;
+        const response = await Activity.create({
+          naMe,
           dificultad,
           duracion,
           temporada
 
           });
+          
+            const countryFinded= await Country.findAll({
+              where:{
+                name:countryName
+              }
+
+            }) 
+          
+           await countryFinded.addActivities(response,{
+              through:{
+                
+              }})
+           
+           //console.log(countryFinded)
+            //response.addActivity(countryFinded)
+                    // res.json(response,data)
         
+          
         
         //console.log("actividad")
-      } 
-      catch (error) {
-        res.send(error);
-      }
+      
+     
       
    
 })

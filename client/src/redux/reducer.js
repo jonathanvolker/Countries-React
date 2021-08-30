@@ -10,7 +10,7 @@ const initialState ={
       
         if (action.type === "GET_COUNTRIES") {
             return {
-                ...state,
+               ...state,
               CountryList: action.payload
             };   
         }          
@@ -18,8 +18,7 @@ const initialState ={
         
         if(action.type === "GET_COUNTRY"){
     
-            return{
-                    ...state,
+            return{...state,
                     Country: action.payload
             }
     

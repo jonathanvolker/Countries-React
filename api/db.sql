@@ -1,6 +1,7 @@
 CREATE DATABASE countrybd;
 
 CREATE TABLE country(
+     
     ID SERIAL PRIMARY KEY,
     countryName VARCHAR(255) NOT NULL,
     flag VARCHAR(255),

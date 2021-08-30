@@ -47,3 +47,17 @@ export const getCountriesPerContinent = (continent) =>
       }
     );
 }
+export const getActivities = (n) => 
+    //obtengo el obj de pais pero por id
+    async(dispatch) =>{
+        const name= n.charAt(0).toUpperCase() + n.slice(1);
+        const response= await fetch("http://localhost:3001/"+name)
+        const data= await response.json();
+        //console.log("unico pais",data)
+        Promise.all(data)
+            .then(obj => {
+                dispatch({ type: "GET_COUNTRY", payload: obj });
+                console.log("UN SOLO PAIS",obj)
+            }
+        );
+    }

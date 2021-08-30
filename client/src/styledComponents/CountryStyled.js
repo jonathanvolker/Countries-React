@@ -19,19 +19,37 @@ box-shadow:0 0 7px 2px rgba(0,0,0,.03);
     margin-left: 50px;
     margin-bottom: 10px;
     border-radius: 15px;
+    width: 350px;
+    max-height: 500px;
+    
     
 img{
     margin-top: 5px;
-    margin-right: 1px;
-    width:100%;
-    height:160px;
+    margin-right: 3px;
+    max-width:260px;
+    max-height:130px;
     object-fit:cover;
-    border-radius:10px
+    border-radius:10px;
+    
+   
 }
+
 .details{
+   
     padding:1.5em;
     color:white;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    
 }
+.text{
+    margin:0;
+    margin-bottom: 1rem;
+    font-size: 20px;
+    height: 30%;
+     text-overflow: ellipsis;
+    overflow: hidden;
+    }
 .mfInput{
   text-decoration: none;
   
@@ -50,15 +68,15 @@ img{
 }
 .close{
   text-decoration: none;
-  height: 100%;
- 
+  height: 20%;
+  
   font-weight: 50px;
   font-size: 11px;
   color: black;
   background-color: #0FA2DD ;
   border-radius: 6px;
   border: 1px solid black;
-  margin-left:130px;
+  margin-left:230px;
   transition-duration: 0.3s;
 }
 .close:hover{
@@ -66,11 +84,7 @@ img{
     background-color: #ffffff;
 }
 
-h2{
-    margin:0;
-    margin-bottom: 1rem;
-    font-size: 20px;
-    }
+
 p{
     font-size: 1em;
     margin-bottom:.5rem
