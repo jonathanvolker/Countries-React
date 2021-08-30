@@ -4,7 +4,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import {getCountry,getCountriesPerContinent} from "../redux/actions"
 import CountryList from './CountryList'
 import Country from "./Country"
- 
+import CountriesPerContinent from './CountriesPerContinent'; 
 const NavStyled=styled.div`
 
 nav{
@@ -49,34 +49,33 @@ nav{
 `
  
 function Nav(){
-    
+const[navState,setNavState]=useState(true) 
 const [state1,setState1]=useState(true)
 const [state2,setState2]=useState(true)
-const[state3,setState3]=useState(true)
-const[notCountry, setNoCountry]=useState(false)
-const [continent,setContinent]=useState( {
-    value : ""
-})
-const[navState,setNavState]=useState(true)
+const [state3,setState3]=useState(true) //estado para mostrar filtrado de continentes
+const [notCountry, setNoCountry]=useState(false) //estado secundario ppor si tengo 1 solo pais existe/no existe
+const [continent,setContinent]=useState( { //estado para guardar el select continent
+    value : ""})
+const [activity,setActivity]=useState( { //estado para guardar el select continent
+    value : ""})
+
 
 const all=async()=>{
     setNavState(false)
     setState1(false)
 }
 
-const [input,setInput] =useState({
+const [input,setInput] =useState({ // input para buscar un solo pais
     pais:""
 })
 
-const selectContinent=(e)=>{
+const selectContinent=(e)=>{ //fijo continente en el estado desde el select
     setContinent(e.target.value)
     
 }
-
-const takeContinent=()=>{
-    dispatch(getCountriesPerContinent(continent))
-    //setNavState(false)
-    //setState3(false)
+const selectActivity=(e)=>{ //fijo actividad en el estado desde el select
+    setActivity(e.target.value)
+    
 }
 
 
@@ -92,13 +91,7 @@ const handleSubmit= (e)=> {
 
  const dispatch=useDispatch();
 var findCountry= useSelector((state)=>state.Country)
-var findContinent=useSelector((state)=>state.CountryContinent)
-
-useEffect(()=>{
-    if(typeof(findContinent[0])== "object"){
-        console.log("entro al use")
-    }
-},[findContinent])
+//var findContinent=useSelector((state)=>state.CountryContinent)
 
 
 useEffect(()=>{
@@ -120,22 +113,30 @@ useEffect(()=>{
              
     } 
 },[findCountry])
+
 const oneCountry= ()=>{
 dispatch(getCountry(input.pais))
+} 
+const takeContinent=()=>{
+    //dispatch(getCountriesPerContinent(continent))
+    setNavState(false)
+    setState3(false)
+}
+const takeActivity=()=>{
+    // setNavState(false)
+     //setState3(false)
+ }
 
-
-}     
 const back=()=>{
     setNavState(true)
     setState2(true)
-    
-    setInput({pais:""})
+     setInput({pais:""})
 }
 const redirect=()=>{
     setTimeout(()=>{window.location.replace("http://localhost:3000/home")}, 1500)
 }
  
-    if(navState){// solo la nav
+if(navState){// solo la nav
     return(
         <>
         
@@ -158,10 +159,8 @@ const redirect=()=>{
                     <button className="butt" type="submit" value="Submit" onClick={oneCountry} >buscar</button>
                   
                 </label>
-               <br/>
-               
-                                       Filtrar continente:
-                  
+               <br/>            
+                        Filtrar continente:
                         <select name="continente" value={continent.value} onChange={selectContinent}>
                             <option defaultValue="selected"></option>
                             <option value="Asia">Asia</option>
@@ -172,33 +171,26 @@ const redirect=()=>{
                             <option value="Polar" >Polar</option>
 
                         </select>
-                        <button className="butt"type="button" value="Enviar" onClick={takeContinent} >Aplicar</button>
-                    
-
-                      
-
-                
+                        <button className="butt"type="button" value="Enviar" onClick={takeContinent} >Aplicar</button> 
                 <label>
-                     <br/>
-                    
-                     Filtrar actividad:
-                     <select name="actividad">
-                         <option>Actividad{/** aca iria el mapeo de la 
-                           actvidad turistica
-                           */} </option>
-                     </select>
-                     <button className="butt" type="submit"> Aplicar</button>
-                     <br/>
-                      <a className="butt" href="http://localhost:3000/activity">agregar una actividad turistica</a>
+                        <br/>
+                        Filtrar actividad:
+                        <select name="actividad" value={activity.value} onChange={selectActivity} >
+                            <option value="actividad" >Actividad{/** aca iria el mapeo de la 
+                             actvidad turistica
+                            */} </option>
+                        </select>
+                        <button className="butt"type="button" value="Enviar" onClick={takeActivity} >Aplicar</button> 
+                        <br/>
+                        <a className="butt" href="http://localhost:3000/activity">agregar una actividad turistica</a>
                 </label>
-                <br/>
-                <br/>
-                <br/>
-               <button className="butt" onClick={all} >Mostrar todos los paises</button>
-            </form>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <button className="butt" onClick={all} >Mostrar todos los paises</button>
+             </form>
             </div>
-            </nav>
-            
+         </nav>
         </NavStyled>
         
         </>
@@ -219,10 +211,8 @@ if(!navState & !state2){//1 solo pais
         if(!navState && notCountry){ //si el paies no existe
             return(
                 <NavStyled>
-
-                 
-                 <div>Pais no encontrado</div>
-                { redirect()}
+                    <div>Pais no encontrado</div>
+                    { redirect()}
 
                 </NavStyled>
             )
@@ -258,9 +248,13 @@ if(!navState & !state2){//1 solo pais
 }
 if(!navState & !state3){ //paises por continente
     return(
+
         <>
+       
+        <CountriesPerContinent continent={continent} />
+
            {
-         findContinent.map(({ subregion,name, flag,continent, area, population,ID }) => {
+      /*    findContinent.map(({ subregion,name, flag,continent, area, population,ID }) => {
            return (
               <div key={name} className="country">
                   <button onClick={back}>Volver</button>
@@ -278,7 +272,7 @@ if(!navState & !state3){ //paises por continente
                </div>
            
            )
-         })
+         }) */
        }
        </>
         )

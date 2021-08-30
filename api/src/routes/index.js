@@ -76,7 +76,7 @@ router.get("/countries/:ID", async(req, res) => {
 router.get("/activity", async(req, res)=>{
   const{ name} =req.body;
   
-  const activity = await Activity.findOne({ 
+  const activity = await Activity.findAll({ 
     where:{name:name},
     include:Country
   

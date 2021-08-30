@@ -43,16 +43,10 @@ export const getCountriesPerContinent = (continent) =>
 
         )//console.log(c)
             dispatch({ type: "GET_COUNTRIES_CONTINENT", payload: c });
-            console.log("listado de continente",c)
+            console.log("listado de continente desde actions",c)
       }
     );
 }
 
-export const sendActivity=(obj) => 
-async (dispatch) =>{
-    const response= await fetch("http://localhost:3001/activity")
-    const data= await response.json();
-     
-    
-}
+
 
