@@ -8,8 +8,8 @@ const [initialState, setInitialState]=useState(false)
 const [secondState,setSecondState]=useState(false)
  //controladores de imputs
  const [input,setInput] =useState({
-    pais:"",
-    nombre:"",
+    countryName:"",
+    name:"",
     dificultad:"",
     duracion:"",
     temporada:""
@@ -32,7 +32,15 @@ const [secondState,setSecondState]=useState(false)
 const handleSubmit= (e)=> {
     e.preventDefault();
   }
-    
+const addActivity=async()=>{
+    const body=input
+    const response= fetch('http://localhost:3001/activity',{
+    method: 'POST',
+    headers:{ "Content-Type": "application/json"},
+    body: JSON.stringify(body)
+})
+console.log(JSON.stringify(body))
+}    
 //verificacion de pais e ingreso de actividad
 const dispatch=useDispatch(); 
 
@@ -43,8 +51,8 @@ useEffect(()=>{
         setInitialState(true)
         
     } 
-    if(input.pais.length){
-        if(input.pais !== findCountry[0])
+    if(input.countryName.length){
+        if(input.countryName !== findCountry[0])
         setSecondState(true)
     }
          
@@ -53,7 +61,7 @@ useEffect(()=>{
 
 
   const prueba= ()=>{
-    dispatch(getCountry(input.pais))
+    dispatch(getCountry(input.countryName))
    
 }
 const back=()=>{
@@ -72,7 +80,7 @@ if(initialState === false && secondState === false){
                         <label>
                             ingrese el pais al que desea agregar su actividad:
                             <br/>
-                            <input type="text" value={input.pais} name="pais" onChange={handleInputCountry} />
+                            <input type="text" value={input.countryName} name="countryName" onChange={handleInputCountry} />
                         </label>
                         <input className="butt" type="submit" value="Submit" onClick={prueba} />
                     </form>
@@ -101,12 +109,12 @@ else{
 
      <ActivityStyled>
         <>
-         <h1>Creando actividadad para {input.pais} </h1>
+         <h1>Creando actividadad para {input.countryName} </h1>
          <div>
          <form onSubmit={handleSubmit}>
             <label>
                 Nombre :
-                <input className="inp" type="text" value={input.nombre} name="nombre" onChange={handleInputChange} />
+                <input className="inp" type="text" value={input.name} name="name" onChange={handleInputChange} />
             </label>    
             <br/>
             <label>
@@ -125,7 +133,7 @@ else{
             </label>    
                (Invierno,Otoño,Primavera,Verano)
             <br/>
-                <input className="butt"  type="submit" value="Submit" />
+                <input className="butt" onClick={addActivity} value= "Submit" type="submit"/> 
         </form>
         </div>
     </>

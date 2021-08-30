@@ -1,16 +1,16 @@
 CREATE DATABASE countrybd;
 
-CREATE TABLE country(
-    ID SERIAL PRIMARY KEY,
-    countryName VARCHAR(255) NOT NULL,
-    flag VARCHAR(255),
-    continent VARCHAR(255), 
-    capital VARCHAR(255),
-    subregion VARCHAR(255),
-    area VARCHAR(255),
-    poblacion VARCHAR(255)
- 
-);
+    CREATE TABLE country(
+        ID VARCHAR(255),
+        countryName SERIAL PRIMARY KEY,
+        flag VARCHAR(255),
+        continent VARCHAR(255), 
+        capital VARCHAR(255),
+        subregion VARCHAR(255),
+        area VARCHAR(255),
+        poblacion VARCHAR(255)
+    
+    );
 CREATE TABLE activity(
     ID SERIAL PRIMARY KEY,
      name VARCHAR(255) ,
