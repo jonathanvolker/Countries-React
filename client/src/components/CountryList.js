@@ -46,6 +46,33 @@ const invert2=()=>{
   });
 
 }
+const inverPopulation=()=>{
+  posts.sort(function (a, b) {
+    if (a.population > b.population) {
+      return -1;
+    }
+    if (a.population < b.population) {
+      return 1;
+    }
+    
+    return 0;
+  });
+}
+const inverPopulation2=()=>{
+  posts.sort(function (a, b) {
+    if (a.population > b.population) {
+      return 1;
+    }
+    if (a.population < b.population) {
+      return -1;
+    }
+    
+    return 0;
+  });
+
+}
+
+
 //funciones cambio de orden
 const changeOrdenZA=()=>{
   setOrden(true);
@@ -57,6 +84,15 @@ const changeOrdenAZ=()=>{
   invert2();
  
 }
+const changePopulationUp=()=>{
+  setOrden(true)
+  inverPopulation()
+}
+const changePopulationDown=()=>{
+  setOrden(false)
+  inverPopulation2()
+}
+
 
 //seteo estado para iniciar lista
 const [state,setState]=useState(false);
@@ -95,6 +131,9 @@ const changeValidation=()=>{
          <div key="secondID" className="navOrder">
               <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
               <button key="b" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
+              <button key="a" className="boton_personalizado" onClick={changePopulationDown} >poblacion - </button>
+              <button key="b" className="boton_personalizado" onClick={changePopulationUp} >poblacion + </button>
+
          </div>
          <nav className="paginate">
             <ul>
@@ -162,6 +201,9 @@ const changeValidation=()=>{
               <div className="navOrder">
                   <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
                   <button key="b" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
+                  <button key="a" className="boton_personalizado" onClick={changePopulationDown} >poblacion - </button>
+                  <button key="b" className="boton_personalizado" onClick={changePopulationUp} >poblacion + </button>
+
               </div>
               <nav className="paginate">
                  <ul>

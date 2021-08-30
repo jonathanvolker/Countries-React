@@ -47,7 +47,7 @@ router.get("/countries", async(req, res) => {
                                                     } })
     
     });
-
+      
     Promise.all(countries)
       .then(async () => {
         const allCountries = await Country.findAll();
@@ -67,6 +67,23 @@ router.get("/countries/:ID", async(req, res) => {
  const {ID} = req.params
  const country = await Country.findByPk(ID)
  res.json(country ||"pais no encontrado")
+
+})
+
+
+
+
+router.get("/activity", async(req, res)=>{
+  const{ name} =req.body;
+  
+  const activity = await Activity.findOne({ 
+    where:{name:name},
+    include:Country
+  
+  }
+  
+  )
+ res.json(activity)
 
 })
 

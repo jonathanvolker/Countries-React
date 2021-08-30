@@ -12,7 +12,7 @@ CREATE DATABASE countrybd;
     
     );
 CREATE TABLE activity(
-    ID SERIAL PRIMARY KEY,
+    ID VARCHAR(255) ,
      name VARCHAR(255) ,
     dificultad VARCHAR(255),
     duracion VARCHAR(255),
