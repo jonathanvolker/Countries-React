@@ -9,12 +9,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull:false,
       unique:true,
-      primaryKey:true,
+      
       
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey:true,
       
     },
 
@@ -45,5 +46,5 @@ module.exports = (sequelize) => {
       type:DataTypes.STRING
     }
 
-  });
+  },{timestamp:false});
 };

@@ -47,3 +47,12 @@ export const getCountriesPerContinent = (continent) =>
       }
     );
 }
+
+export const sendActivity=(obj) => 
+async (dispatch) =>{
+    const response= await fetch("http://localhost:3001/activity")
+    const data= await response.json();
+     
+    
+}
+

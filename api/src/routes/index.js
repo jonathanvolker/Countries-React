@@ -75,7 +75,7 @@ router.post("/activity" , async(req, res) => {
 {/*Recibe los datos recolectados desde el formulario
     controlado de la ruta de creación de actividad turística por body
     Crea una actividad turística en la base de datos */}
-    const {name,dificultad, duracion,temporada} = req.body;
+    const {name,dificultad, duracion,temporada,countryName} = req.body;
    
     try {
        
@@ -87,8 +87,14 @@ router.post("/activity" , async(req, res) => {
           temporada
 
           });
-        
-        
+        const country = await Country.findOne({
+                    where:{
+                      name:countryName
+                    }
+        })
+
+        newActivity.addCountry(country)
+             res.send("success ok")
         //console.log("actividad")
       } 
       catch (error) {
