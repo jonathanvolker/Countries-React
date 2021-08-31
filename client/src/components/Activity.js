@@ -1,12 +1,15 @@
 import React,{useState,useEffect} from 'react'
 import ActivityStyled from '../styledComponents/ActivityStyled'
 import { useSelector,useDispatch } from 'react-redux';
-import {getCountry} from "../redux/actions"
+import {getCountries} from "../redux/actions"
 
 
 export default function Activity() {
-const [initialState, setInitialState]=useState(false)   
+const [initialState, setInitialState]=useState(true)   
 const [secondState,setSecondState]=useState(false)
+const [treeState,setTreeState]=useState(false)
+const [count, setCount]=useState([])
+const [oneCountry,setOneCountry]=useState({})
 const [input,setInput] =useState({  //controladores de imputs
     countryName:"",
     name:"",
@@ -28,6 +31,9 @@ const handleInputCountry= (e)=> {
 const handleSubmit= (e)=> {
     e.preventDefault();
   }
+  const redirect=()=>{
+    setTimeout(()=>{window.location.replace("http://localhost:3000/loading")}, 1000)}
+
 const addActivity=async()=>{
     const body=input
     const response= fetch('http://localhost:3001/activity',{
@@ -35,49 +41,56 @@ const addActivity=async()=>{
     headers:{ "Content-Type": "application/json"},
     body: JSON.stringify(body)
 })
-
+redirect()
 }    
 //verificacion de pais e ingreso de actividad
 const dispatch=useDispatch(); 
 
 var findCountry= useSelector((state)=>state.Countries)
+
+
 useEffect(()=>{
-    if(input.countryName.length){
-        if(input.countryName && findCountry[0])
-        setSecondState(true)
-        console.log(findCountry[0])
-
-        
-    }
-       if(findCountry.length){
-        setInitialState(true)
-            
-    } 
+   dispatch(getCountries())
     
-         
-  },[findCountry]);
+  },[getCountries]);
 
+const filtrado = ()=>{
+const f= findCountry.filter(e => e.name == input.countryName )
+  return f
+} 
+const selectCountry= ()=>{
+   if(filtrado().length){
+        setInitialState(false)  
+        setTreeState(true)
+       
+   }else{
+       setInitialState(false)
+       setSecondState(true)
+       setTreeState(false)   
+    }
+}
 
-
-  const selectCountry= ()=>{
-    dispatch(getCountry(input.countryName))
-  
+const autoBack=()=>{
+    setTimeout(()=>{window.location.replace("http://localhost:3000/activity")},1000)
 }
 const back=()=>{
-    setSecondState(false)
+    setTimeout(()=>{window.location.replace("http://localhost:3000/home")},500)
 }
 
 
-
-if(initialState === false && secondState === false){
+if(initialState){
 
     return (
+
+        
             <ActivityStyled>
             <>
                 <div>
+                <button className="butt" onClick={back}> go Home</button>
                     <form onSubmit={handleSubmit}>
+
                         <label>
-                            ingrese el pais al que desea agregar su actividad:
+                            Ingrese Pais:
                             <br/>
                             <input type="text" value={input.countryName} name="countryName" onChange={handleInputCountry} />
                         </label>
@@ -90,24 +103,29 @@ if(initialState === false && secondState === false){
 
 }
 
-if(initialState === false && secondState === false){
+else if( secondState === true){
         return(
             <ActivityStyled>
+
             <>
-            <div>pais no valido</div>
+           
+            <div>Pais no encontrado</div>
+
             <br/>
-            <input className="butt" type="submit" value="volver" onClick={back} />
+            <div>regresando....</div>
+            {autoBack()}
             </>
             </ActivityStyled>
         )
 }
 
-else{
+else if(treeState){
 
     return (
 
      <ActivityStyled>
         <>
+        
          <h1>Creando actividadad para {input.countryName} </h1>
          <div>
          <form onSubmit={handleSubmit}>
@@ -128,11 +146,14 @@ else{
             <br/>
             <label>
                 Temporada: 
-                <input className="inp" type="text" value={input.temporada} name="temporada" onChange={handleInputChange}required />
+                <input className="inp" type="text" value={input.temporada} name="temporada" onChange={handleInputChange} />
             </label>    
                (Invierno,Otoño,Primavera,Verano)
             <br/>
-                <input className="butt" onClick={addActivity} value= "Submit" type="submit"/> 
+                <input className="butt" onClick={addActivity} value= "Submit" type="submit" disable={input.temporada != "Verano" ||
+                                                                                                     input.temporada != "Invierno" ||
+                                                                                                     input.temporada != "Otoño" ||
+                                                                                                     input.temporada != "Primavera" }   /> 
         </form>
         </div>
     </>

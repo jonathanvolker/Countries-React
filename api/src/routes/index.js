@@ -80,7 +80,7 @@ router.get("/countries", async(req, res) => {
          
   }
  catch (error) {
-    res.send("erros al buscar un pais")
+    res.send("error country not found").status(404)
   }
  
  })

@@ -87,11 +87,12 @@ font-family: 'Courier New', Courier, monospace;
  font-weight: 50px;
   font-size: 11px;
   color: black;
-  background-color: #0FA2DD ;
+  //background-color: #0FA2DD ;
   border-radius: 6px;
   border: 1px solid black;
   margin-left:1px;
   transition-duration: 0.3s;
+  text-decoration: none;
 }
 .butt:hover{
     color: #0FA2DD ;
@@ -102,7 +103,7 @@ font-family: 'Courier New', Courier, monospace;
   font-weight: 50px;
   font-size: 17px;
   color: black;
-  background-color: #0FA2DD ;
+  //background-color: #0FA2DD ;
   border-radius: 6px;
   border: 1px solid black;
   margin-left:1px;

@@ -5,7 +5,7 @@ const NavStyled=styled.div`
 
     display: flex;
     justify-content: center;
-    background-image: url("https://i.ibb.co/cLKQFjK/Map-1000x500-1.jpg");  
+    //background-image: url("https://i.ibb.co/cLKQFjK/Map-1000x500-1.jpg");  
     background-repeat: repeat-x;
    
     
@@ -32,13 +32,14 @@ const NavStyled=styled.div`
  font-weight: 10px;
   font-size: 11px;
   color: black;
-  background-color: #0FA2DD ;
+  background-color:rgb(136,148,240);
   border-radius: 6px;
   border: 1px solid black;
   margin-left:1px;
   transition-duration: 0.3s;
   max-width: 50px;
 max-height: 30px;
+text-decoration: none;
 }
 .butt:hover{
     color: #0FA2DD ;

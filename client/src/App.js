@@ -1,11 +1,11 @@
 import './App.css';
 import Inicio from './components/Inicio';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import Home from './components/Home';
 import Activity from './components/Activity';
-import OneCountry from './components/OneCountry';
-import Nav from './components/Nav';
+//import Nav from './components/Nav';
 import CountryList from './components/CountryList';
+import Loading from './components/Loading';
 
 
 function App() {
@@ -29,6 +29,9 @@ function App() {
                 <div className="App">
                   <Inicio/>
                 </div>
+            </Route>
+            <Route  path="/loading">
+                 <Loading />
             </Route>
       </Switch>
     </Router>

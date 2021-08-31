@@ -14,8 +14,8 @@ const HomeStyled=styled.div`
  .container{
    width: 100vw;
    height: 7000px;
-   background-image: url("https://i.ibb.co/cLKQFjK/Map-1000x500-1.jpg");  
-    background-repeat: repeat-y repeat-x;
+   /* background-image: url("https://i.ibb.co/cLKQFjK/Map-1000x500-1.jpg");  
+    background-repeat: repeat-y repeat-x; */
  }
  input {
    

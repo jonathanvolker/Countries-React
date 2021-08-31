@@ -28,7 +28,6 @@ function CountryActivity({dificultad,duracion,temporada,countryName,name, flag,r
                 <input onClick={changeValidation}  className="mfInput" type="submit"  value="Mas informacion"/>
                 <br/>
                 <br/>
-                
              </div>
         </CountryStyled>
     </>

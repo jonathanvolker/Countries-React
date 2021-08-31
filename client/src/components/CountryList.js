@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import Country from './Country';
-import {getCountries, getCountry} from "../redux/actions";
+//import {getCountries, getCountry} from "../redux/actions";
 import CountryListStyled  from "../styledComponents/CountryListStyled"
-import Nav from './Nav';
+//import Nav from './Nav';
 import CountryActivity from './CountryActivity';
 
 function CountryList (){

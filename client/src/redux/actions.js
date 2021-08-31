@@ -2,7 +2,7 @@
 
 export const getCountries = () => 
  async(dispatch) =>{
-    const response= await fetch("http://localhost:3001/coun")
+    const response= await fetch("http://localhost:3001/countries")
     const data= await response.json();
     //console.log("data eng action",data)
     Promise.all(data)
@@ -24,6 +24,7 @@ export const getCountry = (n) =>
         //console.log("unico pais",data)
         Promise.all(data)
             .then(obj => {
+                
                 dispatch({ type: "GET_COUNTRY", payload: obj });
                 //console.log("UN SOLO PAIS",obj)
             }
