@@ -200,7 +200,7 @@ if(!orden && state2){
               }
               </ul>
          </nav>
-         <div key="uniqueID" className="">
+         <div key="uniqueID" className="countryOrder">
            {
             currentPost.length > 2 || undefined ? (
          currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {

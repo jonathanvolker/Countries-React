@@ -55,7 +55,7 @@ img{
 }
 .close{
   text-decoration: none;
-  height: 100%;
+  //height: 100%;
   font-weight: 50px;
   font-size: 11px;
   color: black;
