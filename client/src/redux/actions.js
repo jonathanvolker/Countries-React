@@ -2,7 +2,7 @@
 
 export const getCountries = () => 
  async(dispatch) =>{
-    const response= await fetch("http://localhost:3001/countries")
+    const response= await fetch("http://localhost:3001/coun")
     const data= await response.json();
     //console.log("data eng action",data)
     Promise.all(data)
@@ -41,9 +41,6 @@ export const getCountry = (n) =>
             for(let i=0; i < obj.length; i++){
                 act.push(obj[i].name)
             }
-        
-           
-
       dispatch({ type: "SET_ACTIVITY", payload: act});
             //console.log("listado activities desde actions",obj)
       }
@@ -56,19 +53,19 @@ export const continentState = (continent)=>{
  }
 }
 
-export const findActivities=async(name)=>{
-    const body=name;
-        
+export const findActivities=(name)=>
+  async(dispatch) =>{  
+    const a ={name:name}
     const response=  await fetch('http://localhost:3001/activities/all',{
     method: 'POST',
     headers:{ "Content-Type": "application/json"},
-    body: JSON.stringify(name)
+    body: JSON.stringify(a)
 })
-return{
-    type:"ALL_ACTIVITIES",
-    payload: response
-}
-
+ const data = await response.json()
+Promise.all(data)
+.then(data => 
+    dispatch({ type: "ALL_ACTIVITIES", payload: data})  )
+    
 } 
 
 

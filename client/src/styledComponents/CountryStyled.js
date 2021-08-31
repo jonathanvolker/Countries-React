@@ -20,7 +20,7 @@ box-shadow:0 0 7px 2px rgba(0,0,0,.03);
     margin-bottom: 10px;
     border-radius: 15px;
     width: 350px;
-    max-height: 600px;
+    max-height: 800px;
 img{
     margin-top: 5px;
     margin-right: 3px;

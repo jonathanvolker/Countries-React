@@ -36,9 +36,10 @@ const initialState ={
         }
     }
     if(action.type === "ALL_ACTIVITIES"){
+      
         return {
             ...state,
-            Activities:action.payload
+            AllActivities:action.payload
         }
     }
         return state;

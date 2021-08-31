@@ -54,7 +54,7 @@ const takeContinent=()=>{
     
 }
 const takeActivity=()=>{
-    console.log(activity)
+   // console.log(activity)
     dispatch(findActivities(activity))
     
 

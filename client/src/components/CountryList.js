@@ -4,31 +4,32 @@ import Country from './Country';
 import {getCountries, getCountry} from "../redux/actions";
 import CountryListStyled  from "../styledComponents/CountryListStyled"
 import Nav from './Nav';
+import CountryActivity from './CountryActivity';
 
 function CountryList (){
  
-
-  
-
 const post= useSelector((state)=>state.Countries)
 
 const [posts,setPosts]=useState(post)
 
 const [orden,setOrden]=useState(false)
-
+const [state2, setState2]=useState(false)
 const continent = useSelector((state)=> state.Continent)
-console.log(continent)
-console.log(posts)
+const activities = useSelector((state)=> state.AllActivities)//
+
+//console.log(activities)
 useEffect(()=>{
   
 if(continent.length){
   let countriesPerContinent= posts.filter(country=>
     country.continent === continent
-   )
-   //console.log(countriesPerContinent)
+   ) 
    setPosts(countriesPerContinent)
-   //console.log(posts)
-  
+}
+if(activities.length){
+  setOrden(false)
+  setState2(true)
+  //console.log(activities,"segundo if")
 }
 },[continent])
 
@@ -132,7 +133,40 @@ const changeValidation=()=>{
   
 }
 
+if(!orden && state2){
+ //console.log(activities[0].countries)
+ return(
 
+  <>
+    { activities.map((act) => {
+          console.log(act.name)
+
+         return (
+          <>
+             <div key={act.countries.name} className="country">
+                 <CountryActivity
+                   key={act.countries[0].name}
+                   flag={act.countries[0].flag}
+                   countryName={act.countries[0].name}
+                   
+                   name={act.name}
+                   dificultad={act.dificultad}
+                   duracion={act.duracion}
+                   temporada={act.temporada}
+                   />
+                  
+              </div>
+          </>
+          )
+         }) }
+  </>
+
+ )
+   
+  
+
+
+}
   if(orden==false ){
   if(state === false){
      
