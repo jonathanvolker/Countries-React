@@ -1,7 +1,8 @@
 const initialState ={
     Countries : [],
       Continent:"",
-      Activities:[]
+      Activities:[],
+      AllActivities:[]
 }
     
     function rootReducer(state = initialState, action) {
@@ -34,7 +35,12 @@ const initialState ={
             Activities:action.payload
         }
     }
-    
+    if(action.type === "ALL_ACTIVITIES"){
+        return {
+            ...state,
+            Activities:action.payload
+        }
+    }
         return state;
       }
      

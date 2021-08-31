@@ -80,16 +80,17 @@ router.get("/activities", async(req, res)=>{
  
 })
 
-router.get("/activity", async(req, res)=>{
+router.post("/activity/all", async(req, res)=>{
   const{ name} =req.body;
   
   const activity = await Activity.findAll({ 
     where:{name:name},
     include:Country
   
-  }
-  
+  },
+    console.log(name)
   )
+
  res.json(activity)
 
 })

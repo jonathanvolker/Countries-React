@@ -2,33 +2,29 @@ import React,{useState,useEffect} from 'react'
 import ActivityStyled from '../styledComponents/ActivityStyled'
 import { useSelector,useDispatch } from 'react-redux';
 import {getCountry} from "../redux/actions"
+
+
 export default function Activity() {
-    
 const [initialState, setInitialState]=useState(false)   
 const [secondState,setSecondState]=useState(false)
- //controladores de imputs
- const [input,setInput] =useState({
+const [input,setInput] =useState({  //controladores de imputs
     countryName:"",
     name:"",
     dificultad:"",
     duracion:"",
     temporada:""
   })
-  
-  const handleInputChange = function(e) {
-    
-    setInput({ ...input, [e.target.name]: e.target.value
-                          //se pone entrecorchetes la var que nose cual va a ser
-                        //y e.target.name seria lo escrito en el input en tiempo real
-    });
-  }
 
-  const handleInputCountry= (e)=> {
+const handleInputChange = function(e) {
+    setInput({ ...input, [e.target.name]: e.target.value
+    });
+}
+
+const handleInputCountry= (e)=> {
      setInput({ ...input, [e.target.name]: e.target.value
      });
-   }
+}
 
- 
 const handleSubmit= (e)=> {
     e.preventDefault();
   }
@@ -46,23 +42,24 @@ const dispatch=useDispatch();
 
 var findCountry= useSelector((state)=>state.Countries)
 useEffect(()=>{
-    console.log(findCountry)
+    if(input.countryName.length){
+        if(input.countryName !== findCountry[0])
+        setSecondState(true)
+        
+    }
        if(findCountry.length){
         setInitialState(true)
         
     } 
-    if(input.countryName.length){
-        if(input.countryName !== findCountry[0])
-        setSecondState(true)
-    }
+    
          
   },[findCountry]);
 
 
 
-  const prueba= ()=>{
+  const selectCountry= ()=>{
     dispatch(getCountry(input.countryName))
-   
+  
 }
 const back=()=>{
     setSecondState(false)
@@ -82,7 +79,7 @@ if(initialState === false && secondState === false){
                             <br/>
                             <input type="text" value={input.countryName} name="countryName" onChange={handleInputCountry} />
                         </label>
-                        <input className="butt" type="submit" value="Submit" onClick={prueba} />
+                        <input className="butt" type="submit" value="Submit" onClick={selectCountry} required/>
                     </form>
                 </div>
                 </>
@@ -114,22 +111,22 @@ else{
          <form onSubmit={handleSubmit}>
             <label>
                 Nombre :
-                <input className="inp" type="text" value={input.name} name="name" onChange={handleInputChange} />
+                <input className="inp" type="text" value={input.name} name="name" onChange={handleInputChange} required/>
             </label>    
             <br/>
             <label>
                 Dificultad:
-                <input className="inp" type="text" value={input.dificultad} name="dificultad" onChange={handleInputChange} />
+                <input className="inp" type="text" value={input.dificultad} name="dificultad" onChange={handleInputChange}required />
             </label>    
             <br/>
             <label>
                 Duracion :
-                <input className="inp" type="text" value={input.duracion} name ="duracion"onChange={handleInputChange} />
+                <input className="inp" type="text" value={input.duracion} name ="duracion"onChange={handleInputChange}required />
             </label>    
             <br/>
             <label>
                 Temporada: 
-                <input className="inp" type="text" value={input.temporada} name="temporada" onChange={handleInputChange} />
+                <input className="inp" type="text" value={input.temporada} name="temporada" onChange={handleInputChange}required />
             </label>    
                (Invierno,Otoño,Primavera,Verano)
             <br/>

@@ -37,10 +37,15 @@ export const getCountry = (n) =>
     //console.log("data eng action",data)
     Promise.all(data)
        .then(obj => {
+        const act = [];
+            for(let i=0; i < obj.length; i++){
+                act.push(obj[i].name)
+            }
+        
+           
 
-      //console.log(c)
-            dispatch({ type: "SET_ACTIVITY", payload: obj});
-            console.log("listado activities desde actions",obj)
+      dispatch({ type: "SET_ACTIVITY", payload: act});
+            //console.log("listado activities desde actions",obj)
       }
     )
 }
@@ -50,6 +55,21 @@ export const continentState = (continent)=>{
      payload:continent
  }
 }
+
+export const findActivities=async(name)=>{
+    const body=name;
+        
+    const response=  await fetch('http://localhost:3001/activity/all',{
+    method: 'POST',
+    headers:{ "Content-Type": "application/json"},
+    body: JSON.stringify(name)
+})
+return{
+    type:"ALL_ACTIVITIES",
+    payload: response
+}
+
+} 
 
 
 

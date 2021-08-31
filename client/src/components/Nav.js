@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import styled from 'styled-components';
 import { useDispatch,useSelector } from 'react-redux';
-import {getCountries,getCountry, continentState} from "../redux/actions"
+import {getCountries,getCountry, continentState,getActivities,findActivities} from "../redux/actions"
 import CountryList from './CountryList'
 //import Country from "./Country"
 const NavStyled=styled.div`
@@ -50,16 +50,17 @@ nav{
 function Nav(){
 const dispatch=useDispatch();
 const [navState,setNavState]=useState(true) 
-const [continent,setContinent]=useState("")
-const [activity,setActivity]=useState("")
-//const [activity,setActivity]=useState( {value : ""})
-const [input,setInput] =useState({pais:""})
-
+const [continent,setContinent]=useState("") //save select contient
+const [activity,setActivity]=useState("") //save select activities
+const [input,setInput] =useState({pais:""}) // save  input individual country
 
 useEffect(()=>{
     dispatch(getCountries())
-
+    dispatch(getActivities()) // 
 },[])
+
+
+const act= useSelector((state)=>state.Activities) 
 
 const all=async()=>{
     setNavState(false)
@@ -71,7 +72,11 @@ const selectContinent=(e)=>{ //fijo continente en el estado desde el select
 
 const selectActivity=(e)=>{ //fijo actividad en el estado desde el select
     setActivity(e.target.value)
+    
 }
+const actResult= act.filter((item,index)=>{
+    return act.indexOf(item) === index;
+})
 
 const handleInputCountry= (e)=> {
     setInput({ ...input, [e.target.name]: e.target.value
@@ -87,9 +92,12 @@ const handelCountry= ()=> {
 
 const takeContinent=()=>{
     dispatch(continentState(continent))
-
+    
 }
 const takeActivity=()=>{
+    console.log(activity)
+    dispatch(findActivities(activity))
+    
 
 }
 
@@ -102,6 +110,7 @@ const back=()=>{
 } */
  
 if(navState){// solo la nav
+   // console.log(act)
     return(
         <>
         
@@ -136,14 +145,19 @@ if(navState){// solo la nav
                             <option value="Polar" >Polar</option>
 
                         </select>
-                        <button className="butt" type="button" value="Enviar" onClick={takeContinent} >Aplicar</button> 
+                        <button className="butt" type="button" value="Submit" onClick={takeContinent} >Aplicar</button> 
                 <label>
                         <br/>
                         Filtrar actividad:
                         <select name="actividad" value={activity.value} onChange={selectActivity} >
-                            <option value="actividad">{} </option>
+                        <option defaultValue="selected"></option>
+                           {actResult.map((a)=>{ 
+                                return(
+                                    <option value={a} >{a} </option>
+                                )
+                            })}
                         </select>
-                        <button className="butt"type="button" value="Enviar" onClick={takeActivity} >Aplicar</button> 
+                        <button className="butt"type="button" value="Submit" onClick={takeActivity} >Aplicar</button> 
                         <br/>
                         <a className="butt" href="http://localhost:3000/activity">agregar una actividad turistica</a>
                 </label>
