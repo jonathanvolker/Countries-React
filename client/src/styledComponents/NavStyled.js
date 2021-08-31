@@ -32,8 +32,8 @@ const NavStyled=styled.div`
  font-weight: 10px;
   font-size: 11px;
   color: black;
-  background-color:rgb(136,148,240);
-  border-radius: 6px;
+  background-color:#DC702E; //rgb(136,148,240);
+  border-radius: 2px;
   border: 1px solid black;
   margin-left:1px;
   transition-duration: 0.3s;

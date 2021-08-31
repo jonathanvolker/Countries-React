@@ -43,7 +43,7 @@ img{
   font-weight: 50px;
   font-size: 11px;
   color: black;
-  background-color: #0FA2DD ;
+  background-color: #DC702E; ;
   border-radius: 6px;
   border: 1px solid black;
   margin-left:1px;
@@ -59,7 +59,7 @@ img{
   font-weight: 50px;
   font-size: 11px;
   color: black;
-  background-color: #0FA2DD ;
+  background-color: #DC702E; ;
   border-radius: 6px;
   border: 1px solid black;
   margin-left:230px;

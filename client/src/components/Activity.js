@@ -150,10 +150,11 @@ else if(treeState){
             </label>    
                (Invierno,Otoño,Primavera,Verano)
             <br/>
-                <input className="butt" onClick={addActivity} value= "Submit" type="submit" disable={input.temporada != "Verano" ||
-                                                                                                     input.temporada != "Invierno" ||
-                                                                                                     input.temporada != "Otoño" ||
-                                                                                                     input.temporada != "Primavera" }   /> 
+                <input className="butt" onClick={(input.temporada == "Verano" ||
+                                    input.temporada == "Invierno" ||
+                                    input.temporada == "Otoño" || 
+                                    input.temporada == "Primavera" )&& addActivity
+                                    } value= "Submit" type="submit" disable    /> 
         </form>
         </div>
     </>
