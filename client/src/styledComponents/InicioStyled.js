@@ -6,11 +6,13 @@ text-align:center;
 border-radius:5px;
 overflow: hidden;
 box-shadow:0 0 7px 2px rgba(0,0,0,.03);
-background: rgb(2,0,36);
+font-family: 'Courier New', Courier, monospace;
+font-size: 25px;
+color: black;
 background: linear-gradient(90deg, rgba(136,148,240,1) 0%, rgba(106,120,227,1) 39%, rgba(55,71,191,1) 100%);
 
-.img{
-    width:50%;
+.world{
+    width:70%;
     height:70%;
     object-fit:cover;
     border-radius:10px;

@@ -59,7 +59,7 @@ export const continentState = (continent)=>{
 export const findActivities=async(name)=>{
     const body=name;
         
-    const response=  await fetch('http://localhost:3001/activity/all',{
+    const response=  await fetch('http://localhost:3001/activities/all',{
     method: 'POST',
     headers:{ "Content-Type": "application/json"},
     body: JSON.stringify(name)

@@ -1,5 +1,6 @@
 import React from 'react';
 import InicioStyled from '../styledComponents/InicioStyled'
+const logo =require('../img/paisesLogo.jpg')
 
 function Inicio(){
     
@@ -10,7 +11,7 @@ function Inicio(){
                 <a href="http://localhost:3000/home">
                 <input className="homebutton" type="button" value="Home"/></a>
                 <br/>
-                <a href="https://imgbb.com/"><img src="https://i.ibb.co/3hmB1t1/banderas.gif" alt="banderas" border="0"/></a>
+                <a><img className="world" src="https://i.pinimg.com/564x/7d/73/e3/7d73e325ca9bb568cad227467dc8b2d4.jpg" alt="banderas" border="0"/></a>
                 <br/>
                 
         </InicioStyled>

@@ -145,7 +145,7 @@ const changeValidation=()=>{
 
      ( <CountryListStyled>
          
-         <h1>Todos los paises</h1>
+         <h1 className="countries">Paises</h1>
          <div key="secondID" className="navOrder">
               <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
               <button key="b" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
@@ -168,7 +168,7 @@ const changeValidation=()=>{
          </nav>
          <div key="uniqueID" className="countryOrder">
            {
-            currentPost.length > 1 ?(
+            currentPost.length > 2 || undefined ? (
          currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {
          
 

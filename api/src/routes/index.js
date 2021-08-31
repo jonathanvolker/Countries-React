@@ -9,7 +9,7 @@ const router = Router();
 
 
 const URL= 'https://restcountries.eu/rest/v2/all';
-const URLname="https://restcountries.eu/rest/v2/name/"
+
   
       
 
@@ -57,72 +57,79 @@ router.get("/countries", async(req, res) => {
       })
       .then((data) => res.json(data))
      } }
-      catch (error) {
+
+catch (error) {
        res.send("error al buscar paises", error)
      }
-    
 })
 
+
 router.get("/countries/:ID", async(req, res) => {
- const {ID} = req.params
- const country = await Country.findByPk(ID)
- res.json(country ||"pais no encontrado")
+try {
+      const {ID} = req.params
+      const name= ID.charAt(0).toUpperCase() + n.slice(1);
+      console.log(name)
+      const country = await Country.findByPk(name)
+      res.json(country ||"pais no encontrado")
+        
+ }
+catch (error) {
+   res.send("erros al buscar un pais")
+ }
 
 })
 
 
 
 router.get("/activities", async(req, res)=>{
- const activities= await Activity.findAll();
-
- Promise.all(activities)
- .then(data => res.json(data))
- 
+try {
+    const activities= await Activity.findAll();
+      Promise.all(activities)
+      .then(data => res.json(data))
+ }
+catch (error) {
+  res.send("error al buscar todas las actividades") 
+ }
 })
 
-router.post("/activity/all", async(req, res)=>{
-  const{ name} =req.body;
+router.get("/activities/all", async(req, res)=>{
+    const{name} =req.body;
   
-  const activity = await Activity.findAll({ 
-    where:{name:name},
-    include:Country
-  
-  },
-    console.log(name)
-  )
+    const activity = await Activity.findAll({ 
+      where:{name:name},
+      include:Country
+    }
+    )
+   Promise.all(activity)
+    
+   .then(data => 
+    res.json(data)
+   )
 
- res.json(activity)
+
 
 })
 
 
 router.post("/activity" , async(req, res) => {
-{/*Recibe los datos recolectados desde el formulario
-    controlado de la ruta de creación de actividad turística por body
-    Crea una actividad turística en la base de datos */}
+
+  try {
     const {name,dificultad, duracion,temporada,countryName} = req.body;
-   
-    try {
-       
-        const newActivity = await Activity.create({
-        
+    const newActivity = await Activity.create({
           name,
           dificultad,
           duracion,
           temporada
-
-          });
-        const country = await Country.findOne({
-                    where:{
-                      name:countryName
-                    }
+       });
+    const country = await Country.findOne({
+                    where:{name:countryName}
         })
 
-        newActivity.addCountry(country)
+    newActivity.addCountry(country)
              res.send("success ok")
         //console.log("actividad")
       } 
-      catch (error) {
+catch (error) {
         res.send(error);
       }
       

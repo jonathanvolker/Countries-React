@@ -19,22 +19,27 @@ box-shadow:0 0 7px 2px rgba(0,0,0,.03);
     margin-left: 50px;
     margin-bottom: 10px;
     border-radius: 15px;
-    
+    width: 350px;
+    max-height: 600px;
 img{
     margin-top: 5px;
-    margin-right: 1px;
-    width:100%;
-    height:160px;
+    margin-right: 3px;
+    max-width:100%;
+    height:200px;
     object-fit:cover;
     border-radius:10px
+}
+.countries{
+    font-family: 'Courier New', Courier, monospace;
 }
 .details{
     padding:1.5em;
     color:white;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .mfInput{
   text-decoration: none;
-  
   font-weight: 50px;
   font-size: 11px;
   color: black;
@@ -51,15 +56,15 @@ img{
 .close{
   text-decoration: none;
   height: 100%;
- 
   font-weight: 50px;
   font-size: 11px;
   color: black;
   background-color: #0FA2DD ;
   border-radius: 6px;
   border: 1px solid black;
-  margin-left:130px;
+  margin-left:230px;
   transition-duration: 0.3s;
+ 
 }
 .close:hover{
     color: #0FA2DD ;

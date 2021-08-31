@@ -1,51 +1,10 @@
 import React,{useState,useEffect} from 'react';
-import styled from 'styled-components';
+
 import { useDispatch,useSelector } from 'react-redux';
 import {getCountries,getCountry, continentState,getActivities,findActivities} from "../redux/actions"
 import CountryList from './CountryList'
 //import Country from "./Country"
-const NavStyled=styled.div`
-
-nav{
-    display: flex;
-    justify-content: center;
-    background-image: url("https://i.ibb.co/cLKQFjK/Map-1000x500-1.jpg");  
-    background-repeat: repeat-x;
-    
-   
-}
-
-.form-div{
-    display: block;
-    font-size: 20px;
-    margin-left: 20px;
-}
-.form-c{
-    font-family: 'Courier New', Courier, monospace;
-    color:black;
-    font-weight: bold;
-    font-size: 22px;
-}
-.countryInput{
-    background: white;
-    height: 17px;
-    border-radius: 6px;
-}
-.butt{
- font-weight: 50px;
-  font-size: 11px;
-  color: black;
-  background-color: #0FA2DD ;
-  border-radius: 6px;
-  border: 1px solid black;
-  margin-left:1px;
-  transition-duration: 0.3s;
-}
-.butt:hover{
-    color: #0FA2DD ;
-    background-color: #ffffff;
-}
-`
+import NavStyled from "../styledComponents/NavStyled"
  
 function Nav(){
 const dispatch=useDispatch();
@@ -176,11 +135,11 @@ if(navState){// solo la nav
 }
 if(!navState){
     return(
-        <>
+        <NavStyled>
       
          <button className="butt" onClick={back} >volver</button>
          <CountryList/>
-        </>
+        </NavStyled>
     )
 }
 

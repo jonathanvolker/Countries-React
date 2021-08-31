@@ -4,20 +4,17 @@ import styled from "styled-components";
 const CountryListStyled=styled.div`
 display:flex;
 flex-direction: column;
-
 justify-content: center;
 align-items: center;
 font-family: 'Courier New', Courier, monospace;
-//border: 1px solid;
-//padding:4em 2em;
-//background: linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+
 .paginate{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 90%;
 
 }
   
@@ -44,6 +41,7 @@ font-family: 'Courier New', Courier, monospace;
     border: 1px solid black;
     
     
+    
   }
   .boton_personalizado:hover{
     color: #1883ba;
@@ -56,6 +54,10 @@ font-family: 'Courier New', Courier, monospace;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+ 
+    max-height: 100%;
+    max-width: 100%;
+    
 
 }
 .navOrder{

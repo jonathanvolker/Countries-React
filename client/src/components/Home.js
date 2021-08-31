@@ -8,6 +8,7 @@ function Home(){
     return(
         <HomeStyled> 
            <div className="container">
+               
                 <Nav/>
               </div>
         </HomeStyled>

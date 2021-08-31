@@ -43,13 +43,15 @@ const dispatch=useDispatch();
 var findCountry= useSelector((state)=>state.Countries)
 useEffect(()=>{
     if(input.countryName.length){
-        if(input.countryName !== findCountry[0])
+        if(input.countryName && findCountry[0])
         setSecondState(true)
+        console.log(findCountry[0])
+
         
     }
        if(findCountry.length){
         setInitialState(true)
-        
+            
     } 
     
          
@@ -88,7 +90,7 @@ if(initialState === false && secondState === false){
 
 }
 
-if(initialState === false && secondState === true){
+if(initialState === false && secondState === false){
         return(
             <ActivityStyled>
             <>
