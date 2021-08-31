@@ -24,8 +24,6 @@ function CountryActivity({dificultad,duracion,temporada,countryName,name, flag,r
              <img loading="lazy" src={flag} alt="" />
              <div className="details">
                 <h2> {countryName}</h2>
-                
-                <p> <strong> Continente: {region}</strong> </p> 
                 <br/>
                 <input onClick={changeValidation}  className="mfInput" type="submit"  value="Mas informacion"/>
                 <br/>
