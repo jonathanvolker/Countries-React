@@ -27,14 +27,25 @@ background:#d7ebba; ;//linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1
 }
 .inp{
   text-decoration: none;
-  font-weight: 50px;
-  font-size: 14px;
+  font-size: 17px;
   color: black;
- 
-  border-radius: 6px;
+  border-radius: 2px;
   border: 1px solid black;
   margin-left:1px;
   transition-duration: 0.3s;
+}
+.inpError{
+  text-decoration: none;
+  font-size: 17px;
+  color: black;
+  border-radius: 2px;
+  margin-left:10px;
+  transition-duration: 0.3s;
+  border: 1px solid red;
+}
+.label{
+  display: flex;
+  flex-direction: column;
 }
 
 `;

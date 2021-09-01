@@ -19,7 +19,7 @@ const initialState ={
     
             return{
                     ...state,
-                    Countries: [action.payload]
+                    Countries: action.payload
             }
     
         }

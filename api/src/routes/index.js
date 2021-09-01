@@ -117,7 +117,7 @@ router.post("/activities/all", async(req, res)=>{
 
 router.post("/activity" , async(req, res) => {
 
-  try {
+/*   try {
     const {name,dificultad, duracion,temporada,countryName} = req.body;
     const newActivity = await Activity.create({
           name,
@@ -136,8 +136,32 @@ router.post("/activity" , async(req, res) => {
 catch (error) {
         res.send(error);
       }
-      
+       */
    
+      try {
+        const {name,dificultad, duracion,temporada,countryName} = req.body;
+        const newActivity = await Activity.create({
+              name,
+              dificultad,
+              duracion,
+              temporada
+           });
+        const country = await Country.findOne({
+                        where:{name:countryName}
+            })
+    
+        newActivity.addCountry(country)
+                 res.send("success ok")
+            //console.log("actividad")
+          } 
+    catch (error) {
+            res.send(error);
+          }
+          
+
+
+
+
 })
 
 module.exports = router;

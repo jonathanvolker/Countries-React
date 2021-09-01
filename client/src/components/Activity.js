@@ -8,8 +8,6 @@ export default function Activity() {
 const [initialState, setInitialState]=useState(true)   
 const [secondState,setSecondState]=useState(false)
 const [treeState,setTreeState]=useState(false)
-const [count, setCount]=useState([])
-const [oneCountry,setOneCountry]=useState({})
 const [input,setInput] =useState({  //controladores de imputs
     countryName:"",
     name:"",
@@ -129,26 +127,36 @@ else if(treeState){
          <h1>Creando actividadad para {input.countryName} </h1>
          <div>
          <form onSubmit={handleSubmit}>
-            <label>
+            <label className= "label">
+            <br/>
                 Nombre :
-                <input className="inp" type="text" value={input.name} name="name" onChange={handleInputChange} required/>
+                <br/>
+                
+                <input className={!input.name && "inpError"} type="text" value={input.name} name="name" onChange={handleInputChange} required/>
             </label>    
             <br/>
-            <label>
+            <label className= "label">
+            <br/>
                 Dificultad:
-                <input className="inp" type="text" value={input.dificultad} name="dificultad" onChange={handleInputChange}required />
+                <br/>
+                <input className={!input.dificultad && "inpError"} type="text" value={input.dificultad} name="dificultad" onChange={handleInputChange}required />
             </label>    
             <br/>
-            <label>
+            <label className= "label">
+            <br/>
                 Duracion :
-                <input className="inp" type="text" value={input.duracion} name ="duracion"onChange={handleInputChange}required />
+                <br/>
+                <input className={!input.duracion && "inpError"} type="text" value={input.duracion} name ="duracion"onChange={handleInputChange}required />
             </label>    
             <br/>
-            <label>
-                Temporada: 
-                <input className="inp" type="text" value={input.temporada} name="temporada" onChange={handleInputChange} />
+            <label className= "label">
+            <br/>
+                Temporada: (Invierno,Otoño,Primavera,Verano)
+                <br/> 
+                <input className={!input.temporada && "inpError"} type="text" value={input.temporada} name="temporada" onChange={handleInputChange} />
             </label>    
-               (Invierno,Otoño,Primavera,Verano)
+                       
+             
             <br/>
                 <input className="butt" onClick={(input.temporada == "Verano" ||
                                     input.temporada == "Invierno" ||

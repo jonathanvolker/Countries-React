@@ -169,17 +169,15 @@ if(!orden && state2){
 }
   if(orden==false ){
   if(state === false){
-     //console.log(currentPost[0][0])
+    // console.log(currentPost[0])
     return(
-      currentPost[0][0] !== undefined ? 
+      currentPost.length == 0 ? (<div>pais no encontrado</div>):
 
               ( <CountryListStyled>
-                  
-                  <h1 className="countries">Mostrando {currentPost[0][0].name} </h1>
-            
+                  <h1 className="countries">Paises</h1>
                   <div key="uniqueID" className="countryOrder">
                     {
-            currentPost.length > 2 || undefined ? (
+            currentPost.length >=2  ? (
               currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {
               
 
@@ -200,21 +198,19 @@ if(!orden && state2){
                 </>
                 )
                 }))  : (<Country 
-                            key={currentPost[0][0].ID}
-                            flag={currentPost[0][0].flag}
-                            name={currentPost[0][0].name}
-                            region={currentPost[0][0].continent}
-                            subregion={currentPost[0][0].subregion}
-                            area={currentPost[0][0].area}
-                            population={currentPost[0][0].population}
-                            ID={currentPost[0][0].ID}
+                            key={currentPost[0].ID}
+                            flag={currentPost[0].flag}
+                            name={currentPost[0].name}
+                            region={currentPost[0].continent}
+                            subregion={currentPost[0].subregion}
+                            area={currentPost[0].area}
+                            population={currentPost[0].population}
+                            ID={currentPost[0].ID}
                         />
                         
                         )
             }     </div>
-            </CountryListStyled>) : (
-                        <div className >pais no encontrado</div>
-             )
+            </CountryListStyled>) 
    )
   }
 
