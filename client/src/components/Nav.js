@@ -78,7 +78,7 @@ if(navState){// solo la nav
            
            <div className="form-div"onSubmit={handleSubmit} >
             <form className="form-c"  >
-                <header className="head"> Busque un Pais por su nombre</header>
+                <header className="head"> Busque un Pais por su nombre o vealos a todos!</header>
                 <br/>
                 <label htmlFor="pais">
                     Pais:

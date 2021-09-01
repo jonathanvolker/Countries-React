@@ -2,7 +2,7 @@ import styled from 'styled-components';
 const HomeStyled=styled.div`
  
   width: 100%;
-  background: #d7ebba;//linear-gradient(90deg, rgba(136,148,240,1) 0%, rgba(106,120,227,1) 39%, rgba(55,71,191,1) 100%);
+  background: #d7ebba;
   display:flex;
   flex-wrap: wrap;
   justify-content: center;

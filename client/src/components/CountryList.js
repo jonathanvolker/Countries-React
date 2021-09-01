@@ -169,75 +169,52 @@ if(!orden && state2){
 }
   if(orden==false ){
   if(state === false){
-     
+     //console.log(currentPost[0][0])
     return(
-        
-      
+      currentPost[0][0] !== undefined ? 
 
-
-      currentPost !== [] ? 
-
-     ( <CountryListStyled>
-         
-         <h1 className="countries">Paises</h1>
-         <div key="secondID" className="navOrder">
-              <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
-              <button key="b" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
-              <button key="a" className="boton_personalizado" onClick={changePopulationDown} >poblacion - </button>
-              <button key="b" className="boton_personalizado" onClick={changePopulationUp} >poblacion + </button>
-
-         </div>
-         <nav className="paginate">
-            <ul>
-              { pageNumbers.map((number)=>{
-                  return ( 
-                      <a key={number} className="boton_personalizado"
-                      onClick={()=> paginate(number) }>
-                        {number} 
-                      </a>
-                  )
-                  })
-              }
-              </ul>
-         </nav>
-         <div key="uniqueID" className="countryOrder">
-           {
-            currentPost.length > 2 || undefined ? (
-         currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {
-         
-
-          return (
-           <>
-              <div key={name} className="country">
-                  <Country
-                    key={name}
-                    flag={flag}
-                    name={name}
-                    region={continent}
-                    subregion={subregion}
-                    area={area}
-                    population={population}
-                    ID={ID}
-                    />
-               </div>
-           </>
-           )
-          }))  : (<Country 
-                      key={currentPost[0][0].ID}
-                      flag={currentPost[0][0].flag}
-                      name={currentPost[0][0].name}
-                      region={currentPost[0][0].continent}
-                      subregion={currentPost[0][0].subregion}
-                      area={currentPost[0][0].area}
-                      population={currentPost[0][0].population}
-                      ID={currentPost[0][0].ID}
-                  />
+              ( <CountryListStyled>
                   
-                  )
-      }     </div>
-       </CountryListStyled>) : (
-         <div>pais no encontrado</div>
-       )
+                  <h1 className="countries">Mostrando {currentPost[0][0].name} </h1>
+            
+                  <div key="uniqueID" className="countryOrder">
+                    {
+            currentPost.length > 2 || undefined ? (
+              currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {
+              
+
+                return (
+                <>
+                    <div key={name} className="country">
+                        <Country
+                          key={name}
+                          flag={flag}
+                          name={name}
+                          region={continent}
+                          subregion={subregion}
+                          area={area}
+                          population={population}
+                          ID={ID}
+                          />
+                    </div>
+                </>
+                )
+                }))  : (<Country 
+                            key={currentPost[0][0].ID}
+                            flag={currentPost[0][0].flag}
+                            name={currentPost[0][0].name}
+                            region={currentPost[0][0].continent}
+                            subregion={currentPost[0][0].subregion}
+                            area={currentPost[0][0].area}
+                            population={currentPost[0][0].population}
+                            ID={currentPost[0][0].ID}
+                        />
+                        
+                        )
+            }     </div>
+            </CountryListStyled>) : (
+                        <div className >pais no encontrado</div>
+             )
    )
   }
 

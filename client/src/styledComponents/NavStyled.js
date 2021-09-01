@@ -3,15 +3,9 @@ import styled from 'styled-components';
 const NavStyled=styled.div`
 
 
-    display: flex;
-    justify-content: center;
-    //background-image: url("https://i.ibb.co/cLKQFjK/Map-1000x500-1.jpg");  
-    background-repeat: repeat-x;
-   
+display: flex;
+justify-content: center;
     
-   
-
-
 .form-div{
     display: block;
     font-size: 20px;
