@@ -3,10 +3,10 @@ import React,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import {getCountries,getCountry, continentState,getActivities,findActivities} from "../redux/actions"
 import CountryList from './CountryList'
-//import Country from "./Country"
 import NavStyled from "../styledComponents/NavStyled"
  
-function Nav(){
+export default function Nav() {
+
 const dispatch=useDispatch();
 const [navState,setNavState]=useState(true) 
 const [continent,setContinent]=useState("") //save select contient
@@ -21,33 +21,30 @@ useEffect(()=>{
 
 const act= useSelector((state)=>state.Activities) 
 
-const all=async()=>{
-    setNavState(false)
-}
+const all=async()=>{  // accion del click mostrar
+    setNavState(false)}
 
 const selectContinent=(e)=>{ //fijo continente en el estado desde el select
-    setContinent(e.target.value)
-}
+    setContinent(e.target.value)}
 
 const selectActivity=(e)=>{ //fijo actividad en el estado desde el select
-    setActivity(e.target.value)
-    
-}
-const actResult= act.filter((item,index)=>{
+    setActivity(e.target.value)}
+
+
+const actResult= act.filter((item,index)=>{ //muestra las actividades en el select
     return act.indexOf(item) === index;
 })
 
-const handleInputCountry= (e)=> {
+const handleInputCountry= (e)=> { //va seteando en tiempo real el pais a buscar
     setInput({ ...input, [e.target.name]: e.target.value
 });}
 
 const handleSubmit= (e)=> {
-    e.preventDefault();
- }
+    e.preventDefault(); }
+
 
 const handelCountry= ()=> {
-    dispatch(getCountry(input.pais))
-}
+    dispatch(getCountry(input.pais))} //accion del boton de fijar un solo pais
 
 const takeContinent=()=>{
     dispatch(continentState(continent))
@@ -89,7 +86,7 @@ if(navState){// solo la nav
                            value={input.pais}
                            onChange={handleInputCountry}
                            />
-                    <button className="butt" type="submit" value="Submit" onClick={handelCountry} >buscar</button>
+                    <button className="butt" type="submit" value="Submit" onClick={handelCountry} >aplicar</button>
                   
                 </label>
                <br/>            
@@ -118,12 +115,12 @@ if(navState){// solo la nav
                         </select>
                         <button className="butt"type="button" value="Submit" onClick={takeActivity} >Aplicar</button> 
                         <br/>
-                        <a className="butt" href="http://localhost:3000/activity">agregar una actividad turistica</a>
+                        <a className="butt" href="http://localhost:3000/activity">Agregar nueva actividad turistica</a>
                 </label>
                         <br/>
                         <br/>
                         <br/>
-                        <button className="butt" onClick={all} >Mostrar</button>
+                        <button className="butt" onClick={all} >MOSTRAR</button>
              </form>
             </div>
          </nav>
@@ -137,7 +134,7 @@ if(!navState){
     return(
         <NavStyled>
       
-         <button className="butt" onClick={back} >volver</button>
+         <button className="back" onClick={back} >volver</button>
          <CountryList/>
         </NavStyled>
     )
@@ -149,4 +146,4 @@ if(!navState){
 
 }
 
-export default Nav;
+

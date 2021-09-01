@@ -3,27 +3,22 @@ import styled from "styled-components";
 
 
 const CountryStyled =styled.div`
-/* width:264px;
-text-align:left;
-border-radius:5px;
-overflow: hidden;
-box-shadow:0 0 7px 2px rgba(0,0,0,.03);
- */
+
     display: flex;
     flex-direction: column;
     color: rgba(0, 0, 0, 0.802);
-    background: linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    background: linear-gradient(90deg, rgba(144,141,71,1) 20%, rgba(253,29,29,1) 100%, rgba(252,176,69,1) 100%);
     font-style: oblique;
     margin-top: 5%;
-    box-shadow: 3px 3px #0A055A, -1em 0 0.4em rgba(5, 9, 121,1);
+    box-shadow: 3px 3px #DC702E, -1em 0 0.4em #DC702E;
     margin-left: 50px;
     margin-bottom: 10px;
     border-radius: 15px;
     width: 350px;
     max-height: 800px;
 img{
-    margin-top: 5px;
-    margin-right: 3px;
+    margin-top: 1px;
+    margin-right: 1px;
     max-width:100%;
     height:200px;
     object-fit:cover;

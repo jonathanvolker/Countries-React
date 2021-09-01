@@ -1,21 +1,19 @@
 import styled from 'styled-components';
 const HomeStyled=styled.div`
- 
-  width: 100%;
   background: #d7ebba;
+  width: 100%;
+  height: 100%;
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
   
- 
  form{
      color:white;    
  }
  .container{
-   width: 100vw;
-   height: 7000px;
-   /* background-image: url("https://i.ibb.co/cLKQFjK/Map-1000x500-1.jpg");  
-    background-repeat: repeat-y repeat-x; */
+   width: 100%;
+   height: 2000px;
+   
  }
  input {
    

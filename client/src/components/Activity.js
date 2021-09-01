@@ -5,11 +5,10 @@ import {getCountries} from "../redux/actions"
 
 
 export default function Activity() {
-const [initialState, setInitialState]=useState(true)   
-const [secondState,setSecondState]=useState(false)
-const [treeState,setTreeState]=useState(false)
+const initialState= true ;
+const  [accCountry,setAccCountry]=useState([])
 const [input,setInput] =useState({  //controladores de imputs
-    countryName:"",
+    countryName:[],
     name:"",
     dificultad:"",
     duracion:"",
@@ -22,8 +21,9 @@ const handleInputChange = function(e) {
 }
 
 const handleInputCountry= (e)=> {
-     setInput({ ...input, [e.target.name]: e.target.value
-     });
+    if(!input.countryName.includes(e.target.value)){
+        setInput({ ...input, countryName : [...input.countryName , e.target.value]
+    })}
 }
 
 const handleSubmit= (e)=> {
@@ -33,6 +33,10 @@ const handleSubmit= (e)=> {
     setTimeout(()=>{window.location.replace("http://localhost:3000/loading")}, 1000)}
 
 const addActivity=async()=>{
+  // console.log(accCountry)
+  
+console.log(input)
+
     const body=input
     const response= fetch('http://localhost:3001/activity',{
     method: 'POST',
@@ -40,7 +44,9 @@ const addActivity=async()=>{
     body: JSON.stringify(body)
 })
 redirect()
-}    
+}   
+
+
 //verificacion de pais e ingreso de actividad
 const dispatch=useDispatch(); 
 
@@ -52,21 +58,17 @@ useEffect(()=>{
     
   },[getCountries]);
 
-const filtrado = ()=>{
-const f= findCountry.filter(e => e.name == input.countryName )
-  return f
+const fijasPaises = ()=>{
+  /*   if(!accCountry.includes(input.countryName)){    
+
+    setAccCountry([...accCountry, input.countryName])
+    console.log(accCountry)
+    } */
+    
 } 
 const selectCountry= ()=>{
-   if(filtrado().length){
-        setInitialState(false)  
-        setTreeState(true)
-       
-   }else{
-       setInitialState(false)
-       setSecondState(true)
-       setTreeState(false)   
-    }
-}
+
+} 
 
 const autoBack=()=>{
     setTimeout(()=>{window.location.replace("http://localhost:3000/activity")},1000)
@@ -76,57 +78,38 @@ const back=()=>{
 }
 
 
-if(initialState){
 
-    return (
 
+if( initialState ){
         
-            <ActivityStyled>
-            <>
-                <div>
-                <button className="butt" onClick={back}> go Home</button>
-                    <form onSubmit={handleSubmit}>
-
-                        <label>
-                            Ingrese Pais:
-                            <br/>
-                            <input type="text" value={input.countryName} name="countryName" onChange={handleInputCountry} />
-                        </label>
-                        <input className="butt" type="submit" value="Submit" onClick={selectCountry} required/>
-                    </form>
-                </div>
-                </>
-            </ActivityStyled>
-        )
-
-}
-
-else if( secondState === true){
-        return(
-            <ActivityStyled>
-
-            <>
-           
-            <div>Pais no encontrado</div>
-
-            <br/>
-            <div>regresando....</div>
-            {autoBack()}
-            </>
-            </ActivityStyled>
-        )
-}
-
-else if(treeState){
-
+//console.log(findCountry.map((e)=> {console.log(e.name)}))
     return (
 
      <ActivityStyled>
         <>
         
-         <h1>Creando actividadad para {input.countryName} </h1>
+         <h1>Creando actividadad </h1>
          <div>
          <form onSubmit={handleSubmit}>
+         <label className= "label">
+            <br/>
+            Elija el pais:
+                        <select name="countryName" value={input.countryName} onChange={handleInputCountry} >
+                        <option defaultValue="selected"></option>
+                           {findCountry.map((a)=>{ 
+                                return(
+                                    <option value={a.name} >{a.name} </option>
+                                )
+                            })}
+
+                            { input.countryName.length ? (input.countryName.map((c)=>{
+                                    return(
+                                        <p> {c[0]} </p>
+                                    )
+                            } )): <p>paises elegidos</p> }
+             </select>
+          
+            </label>    
             <label className= "label">
             <br/>
                 Nombre :
@@ -168,5 +151,9 @@ else if(treeState){
     </>
     </ActivityStyled>
    )
+
 }
+
+
+
 }

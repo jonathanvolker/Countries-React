@@ -1,6 +1,6 @@
 import React from 'react';
 import InicioStyled from '../styledComponents/InicioStyled'
-const logo =require('../img/paisesLogo.jpg')
+
 
 function Inicio(){
     

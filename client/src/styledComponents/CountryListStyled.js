@@ -17,7 +17,10 @@ font-family: 'Courier New', Courier, monospace;
   height: 90%;
 
 }
-  
+ .activities{
+   width: 100%;
+   height: 100%;
+ } 
 .boton_personalizado1{
     text-decoration: none;
     padding: 5px;
@@ -54,12 +57,10 @@ font-family: 'Courier New', Courier, monospace;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
- 
-    max-height: 100%;
+  max-height: 100%;
     max-width: 100%;
-    
-
 }
+
 .navOrder{
  display: flex;
  flex-direction: row;
@@ -84,15 +85,16 @@ font-family: 'Courier New', Courier, monospace;
     border-radius: 6px;
 }
 .butt{
- font-weight: 50px;
+ font-weight: 5px;
   font-size: 11px;
   color: black;
   //background-color: #0FA2DD ;
-  border-radius: 6px;
+  border-radius: 2px;
   border: 1px solid black;
   margin-left:1px;
   transition-duration: 0.3s;
   text-decoration: none;
+  
 }
 .butt:hover{
     color: #0FA2DD ;
@@ -104,7 +106,7 @@ font-family: 'Courier New', Courier, monospace;
   font-size: 17px;
   color: black;
   //background-color: #0FA2DD ;
-  border-radius: 6px;
+  border-radius: 2px;
   border: 1px solid black;
   margin-left:1px;
   transition-duration: 0.3s;

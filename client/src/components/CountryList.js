@@ -5,13 +5,11 @@ import Country from './Country';
 import CountryListStyled  from "../styledComponents/CountryListStyled"
 //import Nav from './Nav';
 import CountryActivity from './CountryActivity';
+import CountryStyled from '../styledComponents/CountryStyled';
 
 function CountryList (){
- 
 const post= useSelector((state)=>state.Countries)
-
 const [posts,setPosts]=useState(post)
-
 const [orden,setOrden]=useState(false)
 const [state2, setState2]=useState(false)
 const continent = useSelector((state)=> state.Continent)
@@ -33,7 +31,7 @@ if(activities.length){
 }
 },[continent])
 
-///////////////////
+
 //funciones para invertir array de paises
 const invert=()=>{
   posts.sort(function (a, b) {
@@ -43,7 +41,6 @@ const invert=()=>{
     if (a.name < b.name) {
       return 1;
     }
-    
     return 0;
   });
 }
@@ -55,10 +52,8 @@ const invert2=()=>{
     if (a.name < b.name) {
       return -1;
     }
-    
     return 0;
   });
-
 }
 const inverPopulation=()=>{
   posts.sort(function (a, b) {
@@ -68,7 +63,6 @@ const inverPopulation=()=>{
     if (a.population < b.population) {
       return 1;
     }
-    
     return 0;
   });
 }
@@ -80,12 +74,9 @@ const inverPopulation2=()=>{
     if (a.population < b.population) {
       return -1;
     }
-    
     return 0;
   });
-
 }
-
 
 //funciones cambio de orden
 const changeOrdenZA=()=>{
@@ -130,58 +121,76 @@ const paginate= (pageNumbers) =>{
 
 const changeValidation=()=>{ 
   setState(true)  
-  
 }
+const redirect=()=>{
+  setTimeout(()=>{window.location.replace("http://localhost:3000/home")}, 1000)}
 
 if(!orden && state2){
  //console.log(activities[0].countries)
  return(
 
-  <>
-    { activities.map((act) => {
+  <CountryListStyled> 
+    <div className="countryOrder" >
+    { activities[0].countries.map((act) => {
           console.log(act.name)
 
          return (
-          <>
-             <div key={act.countries.name} className="country">
+          <> 
+             <div key={act.name} >
                  <CountryActivity
-                   key={act.countries[0].name}
-                   flag={act.countries[0].flag}
-                   countryName={act.countries[0].name}
-                   
-                   name={act.name}
-                   dificultad={act.dificultad}
-                   duracion={act.duracion}
-                   temporada={act.temporada}
+                   key={act.name}
+                   flag={act.flag}
+                   countryName={act.name}
+                   name={activities[0].name}
+                   dificultad={activities[0].dificultad}
+                   duracion={activities[0].duracion}
+                   temporada={activities[0].temporada}
                    />
                   
               </div>
+              
           </>
           )
          }) }
-  </>
-
- )
-   
-  
-
-
+  </div>    
+  </CountryListStyled>
+  )
 }
   if(orden==false ){
   if(state === false){
-    // console.log(currentPost[0])
+    // pais no encontrado // todos los paises del estado o un pais y else descripcion
     return(
-      currentPost.length == 0 ? (<div>pais no encontrado</div>):
+      currentPost.length == 0 ? ( <div>pais no encontrado {redirect() }</div> ):
 
               ( <CountryListStyled>
                   <h1 className="countries">Paises</h1>
-                  <div key="uniqueID" className="countryOrder">
+                  <div className="navOrder">
+                  <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
+                  <button key="b" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
+                  <button key="a" className="boton_personalizado" onClick={changePopulationDown} >poblacion - </button>
+                  <button key="b" className="boton_personalizado" onClick={changePopulationUp} >poblacion + </button>
+
+              </div>
+              <nav className="paginate">
+                 <ul>
+                   {
+                     pageNumbers.map((number)=>{
+                         return ( 
+                         
+                             <a key={number} className="boton_personalizado"
+                             onClick={()=> paginate(number) } >
+                               {number} 
+                             </a>
+                         )
+                         })
+                     }
+                 </ul>
+              </nav>
+              <div key="uniqueID" className="countryOrder">
                     {
             currentPost.length >=2  ? (
               currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {
-              
-
-                return (
+                  return (
                 <>
                     <div key={name} className="country">
                         <Country
@@ -209,11 +218,10 @@ if(!orden && state2){
                         />
                         
                         )
-            }     </div>
+            } </div>
             </CountryListStyled>) 
    )
   }
-
   else{
     currentPost.map(({ name, flag,continent }) => {
       return (<>
@@ -230,28 +238,22 @@ if(!orden && state2){
         </>
      ) })
   }
- }else{
+ }else{  //si orden es true y state false todos los paises con detalle o sin
   if(state === false){
-      
     return(
-        
       <CountryListStyled>
-            
-
               <h1>Todos los paises</h1>
               <div className="navOrder">
                   <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
                   <button key="b" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
                   <button key="a" className="boton_personalizado" onClick={changePopulationDown} >poblacion - </button>
                   <button key="b" className="boton_personalizado" onClick={changePopulationUp} >poblacion + </button>
-
               </div>
               <nav className="paginate">
                  <ul>
                    {
                      pageNumbers.map((number)=>{
                          return ( 
-                         
                              <a key={number} className="boton_personalizado"
                              onClick={()=> paginate(number) } >
                                {number} 
@@ -282,12 +284,9 @@ if(!orden && state2){
                 }) }
             </div>
        </CountryListStyled>
-       
    )
-      
-  }
-
-  else{
+  }else
+    {
     currentPost.map(({ name, flag,continent }) => {
       return (
       <>

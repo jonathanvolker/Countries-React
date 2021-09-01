@@ -146,11 +146,19 @@ catch (error) {
               duracion,
               temporada
            });
-        const country = await Country.findOne({
+
+        /* const country = await Country.findOne({
                         where:{name:countryName}
-            })
-    
-        newActivity.addCountry(country)
+            }) */
+          countryName.forEach( async (c)=> {
+             const country = await Country.findOne({
+              where:{name:c
+              }
+           })
+           await newActivity.addCountry(country)
+         
+       } )
+
                  res.send("success ok")
             //console.log("actividad")
           } 

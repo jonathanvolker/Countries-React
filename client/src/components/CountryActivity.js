@@ -13,9 +13,7 @@ function CountryActivity({dificultad,duracion,temporada,countryName,name, flag,r
       const changeValidationFalse=()=>{ 
         setState(false)  
       }
-      
  
-
     if(state==false){
     return(
         <>
