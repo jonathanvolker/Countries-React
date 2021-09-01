@@ -65,6 +65,20 @@ img{
     color: #0FA2DD ;
     background-color: #ffffff;
 }
+.back{
+    
+  text-decoration: none;
+  //height: 100%;
+  font-weight: 50px;
+  font-size: 11px;
+  color: black;
+  background-color: #DC702E; ;
+  border-radius: 6px;
+  border: 1px solid black;
+  margin-left:230px;
+  transition-duration: 0.3s;
+ 
+}
 
 h2{
     margin:0;

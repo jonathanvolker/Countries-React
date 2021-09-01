@@ -133,8 +133,6 @@ if(navState){// solo la nav
 if(!navState){
     return(
         <NavStyled>
-      
-         <button className="back" onClick={back} >volver</button>
          <CountryList/>
         </NavStyled>
     )

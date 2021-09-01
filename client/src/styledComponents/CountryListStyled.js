@@ -68,6 +68,9 @@ font-family: 'Courier New', Courier, monospace;
 .order{
   text-decoration: none;
 }
+.backDiv{
+  width: 100%;
+} 
 .form-div{
     display: block;
     font-size: 20px;

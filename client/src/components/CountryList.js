@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import Country from './Country';
-//import {getCountries, getCountry} from "../redux/actions";
 import CountryListStyled  from "../styledComponents/CountryListStyled"
-//import Nav from './Nav';
 import CountryActivity from './CountryActivity';
-import CountryStyled from '../styledComponents/CountryStyled';
+
 
 function CountryList (){
 const post= useSelector((state)=>state.Countries)
@@ -160,16 +158,28 @@ if(!orden && state2){
   if(state === false){
     // pais no encontrado // todos los paises del estado o un pais y else descripcion
     return(
-      currentPost.length == 0 ? ( <div>pais no encontrado {redirect() }</div> ):
-
+      currentPost.length == 0 ? (
+              <CountryListStyled>
+                 <div >
+                    Pais no encontrado... { redirect()}
+                 </div>
+                  <br/>
+                  <div>regresando a home...</div>
+              </CountryListStyled>)
+              
+              :
+              
               ( <CountryListStyled>
+                 <div className ="backDiv">
+                 <a href="http://localhost:3000/home">
+                <input className="butt" type="button" value="Home"/></a>
+                 </div>
                   <h1 className="countries">Paises</h1>
                   <div className="navOrder">
                   <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
                   <button key="b" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
                   <button key="a" className="boton_personalizado" onClick={changePopulationDown} >poblacion - </button>
                   <button key="b" className="boton_personalizado" onClick={changePopulationUp} >poblacion + </button>
-
               </div>
               <nav className="paginate">
                  <ul>
