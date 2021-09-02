@@ -58,17 +58,6 @@ useEffect(()=>{
     
   },[getCountries]);
 
-const fijasPaises = ()=>{
-  /*   if(!accCountry.includes(input.countryName)){    
-
-    setAccCountry([...accCountry, input.countryName])
-    console.log(accCountry)
-    } */
-    
-} 
-const selectCountry= ()=>{
-
-} 
 
 const autoBack=()=>{
     setTimeout(()=>{window.location.replace("http://localhost:3000/activity")},1000)
@@ -81,13 +70,10 @@ const back=()=>{
 
 
 if( initialState ){
-        
-//console.log(findCountry.map((e)=> {console.log(e.name)}))
     return (
 
      <ActivityStyled>
         <>
-        
          <h1>Creando actividadad </h1>
          <div>
          <form onSubmit={handleSubmit}>
@@ -97,18 +83,14 @@ if( initialState ){
                         <select name="countryName" value={input.countryName} onChange={handleInputCountry} >
                         <option defaultValue="selected"></option>
                            {findCountry.map((a)=>{ 
-                                return(
+                               
+                               return(
                                     <option value={a.name} >{a.name} </option>
                                 )
                             })}
 
-                            { input.countryName.length ? (input.countryName.map((c)=>{
-                                    return(
-                                        <p> {c[0]} </p>
-                                    )
-                            } )): <p>paises elegidos</p> }
-             </select>
-          
+                             </select>
+                             { }
             </label>    
             <label className= "label">
             <br/>
@@ -141,12 +123,12 @@ if( initialState ){
                        
              
             <br/>
-                <input className="butt" onClick={(input.temporada == "Verano" ||
-                                    input.temporada == "Invierno" ||
-                                    input.temporada == "Otoño" || 
-                                    input.temporada == "Primavera" )&& addActivity
-                                    } value= "Submit" type="submit" disable    /> 
-        </form>
+                <input className="butt" onClick={   addActivity
+                                                    } 
+                                                    value= "Submit" type="submit"
+                                   
+                                                        /> 
+                    </form>
         </div>
     </>
     </ActivityStyled>

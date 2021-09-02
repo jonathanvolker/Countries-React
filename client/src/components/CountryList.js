@@ -5,13 +5,13 @@ import CountryListStyled  from "../styledComponents/CountryListStyled"
 import CountryActivity from './CountryActivity';
 
 
-function CountryList (){
+function CountryList ({back}){
 const post= useSelector((state)=>state.Countries)
 const [posts,setPosts]=useState(post)
 const [orden,setOrden]=useState(false)
 const [state2, setState2]=useState(false)
 const continent = useSelector((state)=> state.Continent)
-const activities = useSelector((state)=> state.AllActivities)//
+const activities = useSelector((state)=> state.AllActivities)
 
 //console.log(activities)
 useEffect(()=>{
@@ -128,6 +128,11 @@ if(!orden && state2){
  return(
 
   <CountryListStyled> 
+             <div className ="backDiv">
+                 <a href="http://localhost:3000/home">
+                <input className="butt" type="button" value="Home"/></a>
+                 </div>
+
     <div className="countryOrder" >
     { activities[0].countries.map((act) => {
           console.log(act.name)
@@ -201,7 +206,7 @@ if(!orden && state2){
             currentPost.length >=2  ? (
               currentPost.map(({ subregion,name, flag,continent, area, population,ID }) => {
                   return (
-                <>
+                <CountryListStyled>
                     <div key={name} className="country">
                         <Country
                           key={name}
@@ -214,7 +219,7 @@ if(!orden && state2){
                           ID={ID}
                           />
                     </div>
-                </>
+                </CountryListStyled>
                 )
                 }))  : (<Country 
                             key={currentPost[0].ID}

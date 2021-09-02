@@ -48,6 +48,17 @@ background:#d7ebba; ;//linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1
   flex-direction: column;
 }
 
+input:disabled , input[disabled]{
+  background: #ccc;
+  color:#666;
+  cursor:not-allowed;
+  &:hover{
+    background: #666;
+    color:#ccc;
+  }
+
+}
+
 `;
 
 export default ActivityStyled;

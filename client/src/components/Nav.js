@@ -133,7 +133,7 @@ if(navState){// solo la nav
 if(!navState){
     return(
         <NavStyled>
-         <CountryList/>
+         <CountryList back={back} />
         </NavStyled>
     )
 }

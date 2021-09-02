@@ -3,7 +3,7 @@ import CountryStyled  from "../styledComponents/CountryStyled"
 
 
 
-function CountryActivity({dificultad,duracion,temporada,countryName,name, flag,region,subregion, area, population,ID}) {
+function CountryActivity({dificultad,duracion,temporada,countryName,name, flag}) {
   
     
     const [state,setState]=useState(false);
