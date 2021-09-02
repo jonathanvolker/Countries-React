@@ -43,12 +43,11 @@ font-family: 'Courier New', Courier, monospace;
     border-radius: 6px;
     border: 1px solid black;
     
-    
-    
   }
+  
   .boton_personalizado:hover{
-    color: #1883ba;
-    background-color: #ffffff;
+    color: black;
+    background-color: #D2A03D ;
   }
 .form-group{
   display: inline; }
@@ -100,8 +99,8 @@ font-family: 'Courier New', Courier, monospace;
   
 }
 .butt:hover{
-    color: #0FA2DD ;
-    background-color: #ffffff;
+    color: black ;
+    background-color: #D2A03D ;
 }
 .act{
   text-decoration: none;
@@ -115,8 +114,8 @@ font-family: 'Courier New', Courier, monospace;
   transition-duration: 0.3s;
 }
 .act:hover{
-  color: #0FA2DD ;
-    background-color: #ffffff;
+  color: black ;
+    background-color: #D2A03D ;
 }
 `;
 

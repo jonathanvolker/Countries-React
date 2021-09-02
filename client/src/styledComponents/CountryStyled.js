@@ -45,8 +45,8 @@ img{
   transition-duration: 0.3s;
 }
 .mfInput:hover{
-    color: #0FA2DD ;
-    background-color: #ffffff;
+    color: black ;
+    background-color: #D2A03D ;
 }
 .close{
   text-decoration: none;
@@ -62,8 +62,8 @@ img{
  
 }
 .close:hover{
-    color: #0FA2DD ;
-    background-color: #ffffff;
+    color: black ;
+    background-color: #D2A03D ;
 }
 .back{
     

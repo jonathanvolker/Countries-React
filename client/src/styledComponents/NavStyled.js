@@ -4,6 +4,10 @@ const NavStyled=styled.div`
 
 display: flex;
 justify-content: center;
+background-image: url("https://cdn.pixabay.com/photo/2017/09/04/16/58/passport-2714675_960_720.jpg");
+background-repeat: no-repeat ;
+background-size: 1700px;
+
 
 .form-div{
     display: block;
@@ -34,9 +38,18 @@ justify-content: center;
   max-height: 100%;
   text-decoration: none;
 }
+.loading{
+    display: flex;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+    color:black;
+    font-weight: bold;
+    font-size: 32px;
+    height: 150px;
+}
 .butt:hover{
-    color: #0FA2DD ;
-    background-color: #ffffff;
+    color: black ;
+    background-color: #D2A03D ;
 }
 .back{
   margin-top: 20px;
@@ -51,8 +64,8 @@ justify-content: center;
   transition-duration: 0.3s;
 }
 .back:hover{
-    color: #0FA2DD ;
-    background-color: #ffffff;
+    color: black ;
+    background-color: #D2A03D ;
 }
     `
 export default NavStyled;

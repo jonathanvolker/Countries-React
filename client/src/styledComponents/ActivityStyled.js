@@ -8,8 +8,7 @@ align-items: center;
 font-family: 'Courier New', Courier, monospace;
 //border: 1px solid;
 padding:4em 2em;
-background:#d7ebba; ;//linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 17%, rgba(0,212,255,1) 100%);
-
+background:#d7ebba; 
 
 .butt{
  font-weight: 50px;
@@ -22,8 +21,8 @@ background:#d7ebba; ;//linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1
   transition-duration: 0.3s;
 }
 .butt:hover{
-    color: #0FA2DD ;
-    background-color: #ffffff;
+    color: black ;
+    background-color: #D2A03D ;
 }
 .inp{
   text-decoration: none;
@@ -47,6 +46,9 @@ background:#d7ebba; ;//linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1
   display: flex;
   flex-direction: column;
 }
+.backDiv{
+  width: 100%;
+} 
 
 input:disabled , input[disabled]{
   background: #ccc;

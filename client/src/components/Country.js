@@ -4,13 +4,12 @@ import CountryStyled  from "../styledComponents/CountryStyled"
 
 
 function Country({name, flag,region,subregion, area, population,ID}) {
-  
-    
-    const [state,setState]=useState(false);
-    const changeValidation=()=>{ 
+  const [state,setState]=useState(false);
+ 
+  const changeValidation=()=>{ 
         setState(true)  
       }
-      const changeValidationFalse=()=>{ 
+  const changeValidationFalse=()=>{ 
         setState(false)  
       }
       

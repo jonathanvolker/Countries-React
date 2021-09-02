@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from 'react';
-
 import { useDispatch,useSelector } from 'react-redux';
 import {getCountries,getCountry, continentState,getActivities,findActivities} from "../redux/actions"
 import CountryList from './CountryList'
@@ -61,9 +60,7 @@ const back=()=>{
     window.location.replace("http://localhost:3000/home")
      setInput({pais:""})
 }
-/* const redirect=()=>{
-    setTimeout(()=>{window.location.replace("http://localhost:3000/home")}, 1500)
-} */
+
  
 if(navState){// solo la nav
    // console.log(act)

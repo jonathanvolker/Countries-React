@@ -6,7 +6,6 @@ import {getCountries} from "../redux/actions"
 
 export default function Activity() {
 const initialState= true ;
-const  [accCountry,setAccCountry]=useState([])
 const [input,setInput] =useState({  //controladores de imputs
     countryName:[],
     name:"",
@@ -16,7 +15,9 @@ const [input,setInput] =useState({  //controladores de imputs
   })
 
 const handleInputChange = function(e) {
-    setInput({ ...input, [e.target.name]: e.target.value
+    const upper= e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+    
+    setInput({ ...input, [e.target.name]: upper
     });
 }
 
@@ -33,10 +34,6 @@ const handleSubmit= (e)=> {
     setTimeout(()=>{window.location.replace("http://localhost:3000/loading")}, 1000)}
 
 const addActivity=async()=>{
-  // console.log(accCountry)
-  
-console.log(input)
-
     const body=input
     const response= fetch('http://localhost:3001/activity',{
     method: 'POST',
@@ -46,25 +43,13 @@ console.log(input)
 redirect()
 }   
 
-
-//verificacion de pais e ingreso de actividad
 const dispatch=useDispatch(); 
-
 var findCountry= useSelector((state)=>state.Countries)
-
 
 useEffect(()=>{
    dispatch(getCountries())
     
   },[getCountries]);
-
-
-const autoBack=()=>{
-    setTimeout(()=>{window.location.replace("http://localhost:3000/activity")},1000)
-}
-const back=()=>{
-    setTimeout(()=>{window.location.replace("http://localhost:3000/home")},500)
-}
 
 
 
@@ -74,6 +59,10 @@ if( initialState ){
 
      <ActivityStyled>
         <>
+        <div className ="backDiv">
+           <a href="http://localhost:3000/home">
+           <input className="butt" type="button" value="Home"/></a>
+        </div>
          <h1>Creando actividadad </h1>
          <div>
          <form onSubmit={handleSubmit}>
@@ -88,9 +77,16 @@ if( initialState ){
                                     <option value={a.name} >{a.name} </option>
                                 )
                             })}
-
-                             </select>
-                             { }
+                         </select>
+                             {
+                                <ul>
+                                   Paises seleccionados: 
+                                 {input.countryName.map((e)=>{
+                                 return (
+                                    <li>{e} </li>
+                                 )})} 
+                                </ul>
+                             }
             </label>    
             <label className= "label">
             <br/>
@@ -123,8 +119,7 @@ if( initialState ){
                        
              
             <br/>
-                <input className="butt" onClick={   addActivity
-                                                    } 
+                <input className="butt" onClick={  addActivity   } 
                                                     value= "Submit" type="submit"
                                    
                                                         /> 

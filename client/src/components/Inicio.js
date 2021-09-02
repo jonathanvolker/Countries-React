@@ -8,9 +8,9 @@ function Inicio(){
     return(
         <InicioStyled> 
             <div className="container"> 
-                <h1>Henry Countries</h1>
+                <h1 className="tittle" >CountriesApp</h1>
                 <a href="http://localhost:3000/home">
-                <input className="homebutton" type="button" value="Home"/></a>
+                <button className="homebutton" type="button" >Comenzemos</button></a>
             </div> 
                 
         </InicioStyled>

@@ -15,7 +15,6 @@ const activities = useSelector((state)=> state.AllActivities)
 
 //console.log(activities)
 useEffect(()=>{
-  
 if(continent.length){
   let countriesPerContinent= posts.filter(country=>
     country.continent === continent
@@ -28,7 +27,6 @@ if(activities.length){
   //console.log(activities,"segundo if")
 }
 },[continent])
-
 
 //funciones para invertir array de paises
 const invert=()=>{
@@ -257,7 +255,11 @@ if(!orden && state2){
   if(state === false){
     return(
       <CountryListStyled>
-              <h1>Todos los paises</h1>
+              <div className ="backDiv">
+                 <a href="http://localhost:3000/home">
+                <input className="butt" type="button" value="Home"/></a>
+                 </div>
+              <h1>Paises</h1>
               <div className="navOrder">
                   <button key="a" className="boton_personalizado" onClick={changeOrdenAZ} >A/Z </button>
                   <button key="b" className="boton_personalizado" onClick={changeOrdenZA} >Z/A </button>
